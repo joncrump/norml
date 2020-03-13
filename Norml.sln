@@ -1,0 +1,177 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{AC2EBE8E-46B9-4230-9CEF-19EC5FF2D01C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{771A7699-9631-409B-9742-28384154B596}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4D0C6DEA-3D2E-49FE-918D-04E2B6487301}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A49C7C25-2885-4B44-A97E-5496510F02BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseMappings", "DatabaseMappings", "{CD202FD2-4659-4879-8559-730716DBE28F}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseMappings\address.js = DatabaseMappings\address.js
+		aside.js = aside.js
+		brand.js = brand.js
+		categoryType.js = categoryType.js
+		company.js = company.js
+		companyPosition.js = companyPosition.js
+		companyRelationshipNode.js = companyRelationshipNode.js
+		companyTypes.js = companyTypes.js
+		contactInfo.js = contactInfo.js
+		contentArticle.js = contentArticle.js
+		contentArticleData.js = contentArticleData.js
+		contentArticleNote.js = contentArticleNote.js
+		contentArticleRevision.js = contentArticleRevision.js
+		contentItem.js = contentItem.js
+		coordinates.js = coordinates.js
+		copyright.js = copyright.js
+		country.js = country.js
+		emailAddress.js = emailAddress.js
+		ingredient.js = ingredient.js
+		ingredientAlias.js = ingredientAlias.js
+		ingredientCategory.js = ingredientCategory.js
+		ingredientComment.js = ingredientComment.js
+		ingredientNote.js = ingredientNote.js
+		ingredientRating.js = ingredientRating.js
+		ingredientRatingText.js = ingredientRatingText.js
+		ingredientUri.js = ingredientUri.js
+		locale.js = locale.js
+		location.js = location.js
+		manufacturer.js = manufacturer.js
+		manufacturerInfo.js = manufacturerInfo.js
+		market.js = market.js
+		menu.js = menu.js
+		menuItem.js = menuItem.js
+		menuItemText.js = menuItemText.js
+		menuText.js = menuText.js
+		messageCampaign.js = messageCampaign.js
+		messageTemplate.js = messageTemplate.js
+		messageTemplateToken.js = messageTemplateToken.js
+		patent.js = patent.js
+		patentAuthor.js = patentAuthor.js
+		product.js = product.js
+		productCategory.js = productCategory.js
+		productLine.js = productLine.js
+		productMetadata.js = productMetadata.js
+		productRevisionHistoryEntry.js = productRevisionHistoryEntry.js
+		productSafetyInfo.js = productSafetyInfo.js
+		productType.js = productType.js
+		productVariant.js = productVariant.js
+		productVariantDescription.js = productVariantDescription.js
+		productVariantEditorialReview.js = productVariantEditorialReview.js
+		productVariantImageUri.js = productVariantImageUri.js
+		productVariantMetadata.js = productVariantMetadata.js
+		productVariantNote.js = productVariantNote.js
+		productVariantReview.js = productVariantReview.js
+		productVariantReviewComment.js = productVariantReviewComment.js
+		productVariantReviewNote.js = productVariantReviewNote.js
+		productVariantSkuInfo.js = productVariantSkuInfo.js
+		productVariantUserReview.js = productVariantUserReview.js
+		ratingType.js = ratingType.js
+		trademark.js = trademark.js
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Common", "Libraries\Common\Norml.Common\Norml.Common.csproj", "{90DE5354-58AD-4B3E-805D-E1F471143033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Common.Data", "Libraries\Common\Norml.Common.Data\Norml.Common.Data.csproj", "{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Common.Models", "Libraries\Common\Norml.Common.Models\Norml.Common.Models.csproj", "{88A2370D-E1B5-45F5-920B-61EA708E5B14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Providers.Common", "Libraries\Common\Norml.Providers.Common\Norml.Providers.Common.csproj", "{8E0E84AE-BA57-4FB2-8009-96CF513BC269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Providers.Repositories.Common", "Libraries\Common\Norml.Providers.Repositories.Common\Norml.Providers.Repositories.Common.csproj", "{34230E89-77A5-4BA2-B172-26F47C9F1879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Tests.Common", "Libraries\Common\Norml.Tests.Common\Norml.Tests.Common.csproj", "{FA9B391B-963B-455E-94C8-C4B88D766886}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Tests.Common.Data", "Libraries\Common\Norml.Tests.Common.Data\Norml.Tests.Common.Data.csproj", "{FFADF87C-28D8-49B2-AFC7-C96301C7D700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Common.Data.Tests", "Tests\Norml.Common.Data.Tests\Norml.Common.Data.Tests.csproj", "{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Norml.Common.Tests", "Tests\Norml.Common.Tests\Norml.Common.Tests.csproj", "{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug-CI|Any CPU = Debug-CI|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DE5354-58AD-4B3E-805D-E1F471143033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34230E89-77A5-4BA2-B172-26F47C9F1879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9B391B-963B-455E-94C8-C4B88D766886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Debug-CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Debug-CI|Any CPU.Build.0 = Debug|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{771A7699-9631-409B-9742-28384154B596} = {AC2EBE8E-46B9-4230-9CEF-19EC5FF2D01C}
+		{CD202FD2-4659-4879-8559-730716DBE28F} = {A49C7C25-2885-4B44-A97E-5496510F02BA}
+		{90DE5354-58AD-4B3E-805D-E1F471143033} = {771A7699-9631-409B-9742-28384154B596}
+		{02D3A7EC-DEED-49F6-A8A7-A7904E56C1F3} = {771A7699-9631-409B-9742-28384154B596}
+		{88A2370D-E1B5-45F5-920B-61EA708E5B14} = {771A7699-9631-409B-9742-28384154B596}
+		{8E0E84AE-BA57-4FB2-8009-96CF513BC269} = {771A7699-9631-409B-9742-28384154B596}
+		{34230E89-77A5-4BA2-B172-26F47C9F1879} = {771A7699-9631-409B-9742-28384154B596}
+		{FA9B391B-963B-455E-94C8-C4B88D766886} = {771A7699-9631-409B-9742-28384154B596}
+		{FFADF87C-28D8-49B2-AFC7-C96301C7D700} = {771A7699-9631-409B-9742-28384154B596}
+		{28B4C8EF-D1FD-487F-8CB4-66F316D211CA} = {4D0C6DEA-3D2E-49FE-918D-04E2B6487301}
+		{CEBD0252-BE26-4F0C-9A3D-E3C5BF265290} = {4D0C6DEA-3D2E-49FE-918D-04E2B6487301}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8530838E-C938-4288-9FE7-96E62A379393}
+	EndGlobalSection
+EndGlobal

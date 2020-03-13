@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Libraries/Common/TightlyCurly.Com.Tests.Common/Base/MockTestBase.cs">
+    <Files>
+      <File FileName="Libraries/Common/TightlyCurly.Com.Tests.Common/Base/MockTestBase.cs" Line="88" Column="30" />
+      <File FileName="Libraries/Common/TightlyCurly.Com.Tests.Common/MethodTester.cs" Line="103" Column="6" />
+      <File FileName="Libraries/Common/TightlyCurly.Com.Tests.Common/Base/PropertyBag.cs" Line="45" Column="13" />
+      <File FileName="Libraries/Common/TightlyCurly.Com.Tests.Common/AssertException.cs" Line="19" Column="6" />
+      <File FileName="productType.js" Line="22" Column="23" />
+      <File FileName="contentArticleNote.js" Line="10" Column="49" />
+      <File FileName="companyRelationshipNode.js" Line="35" Column="14" />
+      <File FileName="Libraries/Repositories/TightlyCurly.Com.Repositories/Constants/Columns.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <DisabledProjects>
+    <String>Databases/TightlyCurly.Com.Database/TightlyCurly.Com.Database.sqlproj</String>
+  </DisabledProjects>
+</Properties>

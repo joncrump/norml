@@ -1,0 +1,86 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.dbmdl
+*.suo
+/.vs/config/applicationhost.config
+/Libraries/Common/TightlyCurly.Com.Providers.Common/obj/Debug/TightlyCurly.Com.Providers.Common.csproj.FileListAbsolute.txt
+/Libraries/Common/TightlyCurly.Com.Providers.Common/obj/Debug/TightlyCurly.Com.Providers.Common.csprojResolveAssemblyReference.cache
+/Libraries/Common/TightlyCurly.Com.Providers.Repositories.Common/obj/Debug
+
+**/*.dll
+**/*.pdb
+
+_ReSharper.*
+*.resharper
+
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+*.dll
+*.cache
+*.dll
+*.cache
+packages
+.idea
+.vs
+obj
+/Tests/TightlyCurly.Com.Common.Data.Tests/obj
+obj
+obj
+/Tests/TightlyCurly.Com.Common.Tests/obj
+/Databases/TightlyCurly.Com.Database/obj
+/Tests/TightlyCurly.Com.Common.Data.Tests/obj
+/Libraries/Repositories/TightlyCurly.Com.Repositories/obj
+/Libraries/Common/TightlyCurly.Com.Tests.Common/obj
+/Libraries/Common/TightlyCurly.Com.Tests.Common.Data/obj
+/Libraries/Common/TightlyCurly.Com.Providers.Repositories.Common/obj
+/Libraries/Common/TightlyCurly.Com.Providers.Common/obj
+/Libraries/Common/TightlyCurly.Com.Common/obj
+/Libraries/Common/TightlyCurly.Com.Common.Models/obj
+/Libraries/Common/TightlyCurly.Com.Common.Data/obj
+obj
+Debug/*
+*.pdb
+*.dll
