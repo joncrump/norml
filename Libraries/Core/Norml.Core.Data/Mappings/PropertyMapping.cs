@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Norml.Core.Data.Mappings
 {
@@ -18,7 +20,7 @@ namespace Norml.Core.Data.Mappings
 
         public string PropertyName { get; set; }
         
-        [JsonConverter(typeof(StringEnumConverter))]
+        [System.Text.Json.Serialization.JsonConverter(typeof(StringEnumConverter))]
         public SqlDbType DatabaseType { get; set; }
 
         public string ParameterName { get; set; }

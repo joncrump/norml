@@ -20,7 +20,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         {
             Asserter
                 .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildInsertQuery<TestClass>(null, It.IsAny<bool>(), It.IsAny<bool>(),
+                    () => SystemUnderTest.BuildInsertQuery<TestFixture>(null, It.IsAny<bool>(), It.IsAny<bool>(),
                         It.IsAny<IEnumerable<string>>(), It.IsAny<string>()))
                 .AndVerifyHasParameter("model");
         }
@@ -28,7 +28,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokeQueryBuilderStrategyFactory()
         {
-            SystemUnderTest.BuildInsertQuery(Mock.Of<TestClass>(), It.IsAny<bool>(),
+            SystemUnderTest.BuildInsertQuery(Mock.Of<TestFixture>(), It.IsAny<bool>(),
                 It.IsAny<bool>(), It.IsAny<IEnumerable<string>>(), It.IsAny<string>());
 
             Mocks.Get<IQueryBuilderStrategyFactory>()

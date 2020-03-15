@@ -1,4 +1,7 @@
-﻿namespace Norml.Core.Configuration
+﻿using System.Configuration;
+using Norml.Core.Extensions;
+
+namespace Norml.Core.Configuration
 {
     public class SettingElementCollection : ConfigurationElementCollection
     {

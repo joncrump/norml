@@ -91,7 +91,7 @@ namespace Norml.Core.Tests.Common.Base
 
         protected void DoMethodTests<TItem>(string methodName, IEnumerable<string> parametersToSkip = null) where TItem : class
         {
-            MethodTester.TestMethodParameters<TItem>(methodName, parametersToSkip);
+            MethodTester.TestParameters<TItem>(methodName, parametersToSkip);
         }
 
         protected IEnumerable<T> CreateEnumerableOfItems<T>(int numberOfItems = 5) where T : class, new()

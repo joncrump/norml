@@ -1,15 +1,20 @@
 ﻿using System;
+using Moq;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Exceptions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
 {
-    [TestClass]
-    public class TheConstructor : MsTestBase
+    [TestFixture]
+    public class TheConstructor : TestBase
     {
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentInvalidExceptionIfJoinTypeIsNone()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentInvalidException>(
+                .AssertException<ArgumentInvalidException>(
                     () => new JoinAttribute(JoinType.None, It.IsAny<Type>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<JoinType>(), It.IsAny<string>(),
@@ -17,11 +22,11 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("relationshipType");
         }
 
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentNullExceptionIfJoinedTypeIsNull()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentNullException>(
+                .AssertException<ArgumentNullException>(
                     () => new JoinAttribute(JoinType.Inner, It.IsAny<Type>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<JoinType>(), It.IsAny<string>(),
@@ -29,11 +34,11 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("joinedType");
         }
 
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentNullExceptionIfLeftKeyIsNull()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentNullException>(
+                .AssertException<ArgumentNullException>(
                     () => new JoinAttribute(JoinType.Inner, typeof(object), null,
                         It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<JoinType>(), It.IsAny<string>(),
@@ -41,11 +46,11 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("leftKey");
         }
 
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentEmptyExceptionIfLeftKeyIsEmpty()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentEmptyException>(
+                .AssertException<ArgumentEmptyException>(
                     () => new JoinAttribute(JoinType.Inner, typeof(object), String.Empty,
                         It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<JoinType>(), It.IsAny<string>(),
@@ -53,11 +58,11 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("leftKey");
         }
 
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentNullExceptionIfRightKeyIsNull()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentNullException>(
+                .AssertException<ArgumentNullException>(
                     () => new JoinAttribute(JoinType.Inner, typeof(object), DataGenerator.GenerateString(),
                         null, It.IsAny<string>(), It.IsAny<string>(),
                         It.IsAny<string>(), It.IsAny<JoinType>(), It.IsAny<string>(),
@@ -65,11 +70,11 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("rightKey");
         }
 
-        [TestMethod]
+        [Test]
         public void WillThrowArgumentEmptyExceptionIfRightKeyIsEmpty()
         {
             Asserter
-                .AssertExceptionIsThrown<ArgumentEmptyException>(
+                .AssertException<ArgumentEmptyException>(
                     () => new JoinAttribute(JoinType.Inner, typeof(object), 
                         DataGenerator.GenerateEmailAddress(),
                         String.Empty, It.IsAny<string>(), It.IsAny<string>(),
@@ -78,7 +83,7 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 .AndVerifyHasParameter("rightKey");
         }
 
-        [TestMethod]
+        [Test]
         public void WillPopulateProperties()
         {
             var expectedJoinType = JoinType.None;

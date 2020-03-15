@@ -4,14 +4,14 @@ using System.Data;
 namespace Norml.Core.Data.Tests
 {
     [Table("dbo.TestTable")]
-    public class TestClass
+    public class TestFixture
     {
-        public TestClass()
+        public TestFixture()
         {
             Values = new List<string>();
         }
 
-        [FieldMetadata("TestClassId", SqlDbType.Int, "@id", true)]
+        [FieldMetadata("TestFixtureId", SqlDbType.Int, "@id", true)]
         public int Id { get; set; }
 
         [FieldMetadata("SomeFoo", SqlDbType.NVarChar, "@fooParameter")]

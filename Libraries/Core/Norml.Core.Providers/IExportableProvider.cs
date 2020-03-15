@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Norml.Core.Data;
 
 namespace Norml.Core.Providers
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Norml.Core.Data.QueryBuilders;
 using Norml.Core.Data.Repositories.Strategies;
+using Norml.Core.Helpers;
 
 namespace Norml.Core.Data.Repositories
 {

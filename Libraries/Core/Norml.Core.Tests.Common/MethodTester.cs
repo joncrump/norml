@@ -16,7 +16,7 @@ namespace Norml.Core.Tests.Common
             _dataGenerator = dataGenerator;
         }
 
-        public void TestMethodParameters<TItemUnderTest>(string methodName, 
+        public void TestParameters<TItemUnderTest>(string methodName, 
             IEnumerable<string> parametersToSkip = null)
             where TItemUnderTest : class
         {
@@ -58,7 +58,7 @@ namespace Norml.Core.Tests.Common
                     continue;
                 }
 
-                var failed = TestMethodInfoForNullParameter(method, instance);
+                var failed = TestInfoForNullParameter(method, instance);
 
                 if (failed.IsNotNullOrEmpty())
                 {
@@ -113,7 +113,7 @@ namespace Norml.Core.Tests.Common
 			}
 		}
 
-        public IEnumerable<string> TestMethodInfoForNullParameter(MethodInfo method, object instance)
+        public IEnumerable<string> TestInfoForNullParameter(MethodInfo method, object instance)
         {
             var parameters = method.GetParameters().ToList();
             var failedParameters = new List<string>();

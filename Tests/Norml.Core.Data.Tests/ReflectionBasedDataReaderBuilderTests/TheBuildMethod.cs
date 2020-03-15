@@ -19,13 +19,13 @@ namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
         [Test]
         public void WillBuildItemWithoutValueFactoriesAndNoPrefix()
         {
-            TestClass expected = null;
+            TestFixture expected = null;
             MockDataReader reader = null;
 
-            expected = ObjectCreator.CreateNew<TestClass>();
+            expected = ObjectCreator.CreateNew<TestFixture>();
             reader = new MockDataReaderHelper().BuildMockDataReader(new[] {expected});
         
-            var actual = SystemUnderTest.Build<TestClass>(reader);
+            var actual = SystemUnderTest.Build<TestFixture>(reader);
 
             Asserter.AssertEquality(expected, actual);
         }
@@ -33,14 +33,14 @@ namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
         [Test]
         public void WillBuildItemWithoutValueFactoriesAndPrefix()
         {
-            TestClass expected = null;
+            TestFixture expected = null;
             MockDataReader reader = null;
             var prefix = String.Empty;
 
             prefix = DataGenerator.GenerateString();
-            expected = ObjectCreator.CreateNew<TestClass>();
+            expected = ObjectCreator.CreateNew<TestFixture>();
             reader = new MockDataReaderHelper().BuildMockDataReader(new[] {expected}, prefix);
-            var actual = SystemUnderTest.Build<TestClass>(reader, prefix);
+            var actual = SystemUnderTest.Build<TestFixture>(reader, prefix);
 
             Asserter.AssertEquality(expected, actual);
         }
@@ -48,13 +48,13 @@ namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
         [Test]
         public void WillBuildItemWithValueFactories()
         {
-            TestClass expected = null;
+            TestFixture expected = null;
             MockDataReader reader = null;
             Mock<IValueFactory> valueFactory = null;
 
-            var valueFactoryModel = ObjectCreator.CreateNew<TestClassWithValueFactories>();
+            var valueFactoryModel = ObjectCreator.CreateNew<TestFixtureWithValueFactories>();
 
-            expected = ObjectCreator.CreateNew<TestClass>();
+            expected = ObjectCreator.CreateNew<TestFixture>();
             reader = new MockDataReaderHelper().BuildMockDataReader(new [] {valueFactoryModel});
 
             valueFactory = Mocks.Get<IValueFactory>();
@@ -64,28 +64,28 @@ namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
                 .Setup(x => x.GetValueFactory(It.IsAny<string>(), It.IsAny<ParameterInfo>()))
                 .Returns(fakeExpression);
     
-            var actual = SystemUnderTest.Build<TestClassWithValueFactories>(reader);
+            var actual = SystemUnderTest.Build<TestFixtureWithValueFactories>(reader);
 
             valueFactory
-                .Verify(x => x.GetValueFactory("TestClass1", It.IsAny<ParameterInfo>()), 
+                .Verify(x => x.GetValueFactory("TestFixture1", It.IsAny<ParameterInfo>()), 
                     Times.Once);
 
             valueFactory
-                .Verify(x => x.GetValueFactory("TestClass2", It.IsAny<ParameterInfo>()), 
+                .Verify(x => x.GetValueFactory("TestFixture2", It.IsAny<ParameterInfo>()), 
                     Times.Once);
 
             Assert.IsFalse(actual.ValueFactories.IsNullOrEmpty());
 
-            Assert.IsTrue(actual.ValueFactories.ContainsKey("TestClass1"));
-            Assert.IsNotNull(actual.ValueFactories["TestClass1"]);
-            Asserter.AssertEquality(expected, actual.TestClass1);
+            Assert.IsTrue(actual.ValueFactories.ContainsKey("TestFixture1"));
+            Assert.IsNotNull(actual.ValueFactories["TestFixture1"]);
+            Asserter.AssertEquality(expected, actual.TestFixture1);
 
-            Assert.IsTrue(actual.ValueFactories.ContainsKey("TestClass2"));
-            Assert.IsNotNull(actual.ValueFactories["TestClass2"]);
-            Asserter.AssertEquality(expected, actual.TestClass2);
+            Assert.IsTrue(actual.ValueFactories.ContainsKey("TestFixture2"));
+            Assert.IsNotNull(actual.ValueFactories["TestFixture2"]);
+            Asserter.AssertEquality(expected, actual.TestFixture2);
         }
 
-        public class TestClass
+        public class TestFixture
         {
             [FieldMetadata("Id", SqlDbType.Int)]
             public int Id { get; set; }
@@ -97,47 +97,47 @@ namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
             public string Baz { get; set; }
         }
 
-        public class TestClassWithValueFactories : ValueFactoryModelBase
+        public class TestFixtureWithValueFactories : ValueFactoryModelBase
         {
-            private TestClass _testClass1;
-            private TestClass _testClass2;
+            private TestFixture _TestFixture1;
+            private TestFixture _TestFixture2;
 
             [FieldMetadata("Id", SqlDbType.Int)]
             public int Id { get; set; }
 
-            [ValueFactory("TestClass1")]
-            public TestClass TestClass1
+            [ValueFactory("TestFixture1")]
+            public TestFixture TestFixture1
             {
                 get
                 {
-                    if (_testClass1.IsNull())
+                    if (_TestFixture1.IsNull())
                     {
-                        _testClass1 = GetOrLoadLazyValue(_testClass1, "TestClass1");
+                        _TestFixture1 = GetOrLoadLazyValue(_TestFixture1, "TestFixture1");
                     }
 
-                    return _testClass1;
+                    return _TestFixture1;
                 }
                 set
                 {
-                    _testClass1 = value;
+                    _TestFixture1 = value;
                 }
             }
 
-            [ValueFactory("TestClass2")]
-            public TestClass TestClass2
+            [ValueFactory("TestFixture2")]
+            public TestFixture TestFixture2
             {
                 get
                 {
-                    if (_testClass2.IsNull())
+                    if (_TestFixture2.IsNull())
                     {
-                        _testClass2 = GetOrLoadLazyValue(_testClass2, "TestClass2");
+                        _TestFixture2 = GetOrLoadLazyValue(_TestFixture2, "TestFixture2");
                     }
 
-                    return _testClass2;
+                    return _TestFixture2;
                 }
                 set
                 {
-                    _testClass2 = value;
+                    _TestFixture2 = value;
                 }
             }
         }

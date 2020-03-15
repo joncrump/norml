@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using Norml.Core.Data.Repositories.Strategies;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data
 {

@@ -15,38 +15,38 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.InsertQueryBuilder
         {
             Asserter
                 .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildQuery<TestClass>());
+                    () => SystemUnderTest.BuildQuery<TestFixture>());
         }
 
         [Test]
         public void WillBuildInsertQuery()
         {
             QueryInfo expected = null;
-            TestClass testClass = null;
+            TestFixture TestFixture = null;
             IEnumerable<IDbDataParameter> expectedParameters = null;
 
-            testClass = ObjectCreator.CreateNew<TestClass>();
-            var expectedQuery = "INSERT dbo.TestTable ([TestClassId], [SomeFoo], [PioneerSquareBar]) VALUES (@id, @fooParameter, @itsFridayLetsGoToTheBar); SELECT SCOPE_IDENTITY() AS Id;";
+            TestFixture = ObjectCreator.CreateNew<TestFixture>();
+            var expectedQuery = "INSERT dbo.TestTable ([TestFixtureId], [SomeFoo], [PioneerSquareBar]) VALUES (@id, @fooParameter, @itsFridayLetsGoToTheBar); SELECT SCOPE_IDENTITY() AS Id;";
             expectedParameters = new List<IDbDataParameter>
             {
-                new SqlParameter("@id", SqlDbType.Int) {Value = testClass.Id},
-                new SqlParameter("@fooParameter", SqlDbType.NVarChar) {Value = testClass.Foo},
-                new SqlParameter("@itsFridayLetsGoToTheBar", SqlDbType.NVarChar) {Value = testClass.Bar}
+                new SqlParameter("@id", SqlDbType.Int) {Value = TestFixture.Id},
+                new SqlParameter("@fooParameter", SqlDbType.NVarChar) {Value = TestFixture.Foo},
+                new SqlParameter("@itsFridayLetsGoToTheBar", SqlDbType.NVarChar) {Value = TestFixture.Bar}
             };
             expected = new QueryInfo(expectedQuery, Mock.Of<TableObjectMapping>(), expectedParameters);
 
             Mocks.Get<IFieldHelper>()
-                .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), testClass, It.IsAny<bool>(), 
+                .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), TestFixture, It.IsAny<bool>(), 
                     It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(() => new TableObjectMapping
                 {
                     TableName = "dbo.TestTable",
                     FieldMappings = new Dictionary<string, FieldParameterMapping>
                         {
-                            {"Id", new FieldParameterMapping("TestClassId", "@id", SqlDbType.Int, testClass.Id, true)},
-                            {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar, testClass.Foo)},
+                            {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, TestFixture.Id, true)},
+                            {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar, TestFixture.Foo)},
                             {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, 
-                                testClass.Bar)}
+                                TestFixture.Bar)}
                         }
                 });
                     
@@ -61,9 +61,9 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.InsertQueryBuilder
             parameters.IgnoreIdentity = true;
             parameters.DesiredFields = null;
             parameters.TableName = null;
-            parameters.Model = testClass;
+            parameters.Model = TestFixture;
 
-            QueryInfo actual = SystemUnderTest.BuildQuery<TestClass>(parameters);
+            QueryInfo actual = SystemUnderTest.BuildQuery<TestFixture>(parameters);
             var expression = ConstructComparisonDelegate();
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "tableObjectMappings" });

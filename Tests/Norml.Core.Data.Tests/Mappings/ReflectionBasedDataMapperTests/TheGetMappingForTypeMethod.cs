@@ -29,7 +29,7 @@ namespace Norml.Core.Data.Tests.Mappings.ReflectionBasedDataMapperTests
                 .Returns("@notDecorated");
 
             var expected = GetExpected();
-            var actual = SystemUnderTest.GetMappingForType(typeof(TestClass));
+            var actual = SystemUnderTest.GetMappingForType(typeof(TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] {"PropertyMappings"});
             Asserter.AssertEquality(expected.PropertyMappings, actual.PropertyMappings);
@@ -40,7 +40,7 @@ namespace Norml.Core.Data.Tests.Mappings.ReflectionBasedDataMapperTests
             return new TypeMapping
             {
                 DataSource = "dbo.FakeTable",
-                Type = typeof(TestClass),
+                Type = typeof(TestFixture),
                 CountField = "Id",
                 CountAlias = "NumRows",
                 PropertyMappings = GetPropertyMappings()
@@ -94,7 +94,7 @@ namespace Norml.Core.Data.Tests.Mappings.ReflectionBasedDataMapperTests
         }
 
         [Table("dbo.FakeTable")]
-        public class TestClass
+        public class TestFixture
         {
             [CountMetadata("Id", "NumRows")]
             [FieldMetadata("Id", SqlDbType.Int, "@id", true, false, 0, null, true)]

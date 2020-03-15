@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Moq;
 
 namespace Norml.Core.Tests.Common.Base
 {

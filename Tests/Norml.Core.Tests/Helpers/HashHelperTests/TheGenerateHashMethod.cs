@@ -1,4 +1,7 @@
 ﻿using System;
+using Norml.Core.Helpers;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Tests.Helpers.HashHelperTests
 {
@@ -17,7 +20,7 @@ namespace Norml.Core.Tests.Helpers.HashHelperTests
         [Test]
         public void WillReturnHashIfValueIsHashable()
         {
-            var actual = SystemUnderTest.GenerateHash(new HashableTestClass());
+            var actual = SystemUnderTest.GenerateHash(new HashableTestFixture());
 
             Asserter.AssertEquality("TestingHash", actual);
         }
@@ -35,7 +38,7 @@ namespace Norml.Core.Tests.Helpers.HashHelperTests
             Asserter.AssertEquality(expected, actual);
         }
 
-        public class HashableTestClass : IHashable
+        public class HashableTestFixture : IHashable
         {
             public string Hash
             {

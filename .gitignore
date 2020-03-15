@@ -84,3 +84,5 @@ obj
 Debug/*
 *.pdb
 *.dll
+/.scannerwork/*.sonar_lock
+/.scannerwork

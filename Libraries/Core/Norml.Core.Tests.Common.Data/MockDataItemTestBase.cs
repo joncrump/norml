@@ -1,4 +1,7 @@
-﻿namespace Norml.Core.Tests.Common.Data
+﻿using Norml.Core.Tests.Common.Base;
+using Norml.Core.Tests.Common.Helpers;
+
+namespace Norml.Core.Tests.Common.Data
 {
     public abstract class MockDataItemTestBase<TItemUnderTest> : MockTestBase<TItemUnderTest>
         where TItemUnderTest : class

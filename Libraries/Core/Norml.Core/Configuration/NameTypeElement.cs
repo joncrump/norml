@@ -1,4 +1,6 @@
-﻿namespace Norml.Core.Configuration
+﻿using System.Configuration;
+
+namespace Norml.Core.Configuration
 {
     public class NameTypeElement : ConfigurationElement
     {

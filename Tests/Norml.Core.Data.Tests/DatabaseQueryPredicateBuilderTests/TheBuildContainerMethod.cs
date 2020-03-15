@@ -15,8 +15,8 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             var mapper = new Mock<IDataMapper>();
 
             mapper
-                .Setup(x => x.GetMappingForType(typeof(TestClass)))
-                .Returns(GetTestClassTypeMapping());
+                .Setup(x => x.GetMappingForType(typeof(TestFixture)))
+                .Returns(GetTestFixtureTypeMapping());
 
             Mocks.Get<IObjectMapperFactory>()
                 .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
@@ -32,15 +32,15 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillBuildContainer()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             var id = DataGenerator.GenerateInteger();
-            var testClass = ObjectCreator.CreateNew<TestClass>();
-            expression = t => t.Id == id && t.Bar == testClass.Bar || t.Foo == "Margaritas";
+            var TestFixture = ObjectCreator.CreateNew<TestFixture>();
+            expression = t => t.Id == id && t.Bar == TestFixture.Bar || t.Foo == "Margaritas";
 
             expected = new QueryContainer(
-                "TestClassId = @id AND PioneerSquareBar = @itsFridayLetsGoToTheBar OR SomeFoo = @fooParameter",
+                "TestFixtureId = @id AND PioneerSquareBar = @itsFridayLetsGoToTheBar OR SomeFoo = @fooParameter",
                 new List<IDbDataParameter>
                 {
                     new SqlParameter
@@ -53,7 +53,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                     {
                         ParameterName = "@itsFridayLetsGoToTheBar",
                         SqlDbType = SqlDbType.NVarChar,
-                        Value = testClass.Bar
+                        Value = TestFixture.Bar
                     },
                     new SqlParameter
                     {
@@ -63,7 +63,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                     }
                 });
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
             Expression<Action<SqlParameter, SqlParameter>> compareExpression =
                 (e, a) => CompareParameters(e, a);
 
@@ -84,16 +84,16 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillBuildContainerWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
 
             var id = DataGenerator.GenerateInteger();
-            var testClass = ObjectCreator.CreateNew<TestClass>();
-            expression = t => t.Id == id && t.Bar == testClass.Bar || t.Foo == "Margaritas";
+            var TestFixture = ObjectCreator.CreateNew<TestFixture>();
+            expression = t => t.Id == id && t.Bar == TestFixture.Bar || t.Foo == "Margaritas";
 
             expected = new QueryContainer(
-                "t1.t1_TestClassId = @id AND t1.t1_PioneerSquareBar = @itsFridayLetsGoToTheBar OR t1.t1_SomeFoo = @fooParameter",
+                "t1.t1_TestFixtureId = @id AND t1.t1_PioneerSquareBar = @itsFridayLetsGoToTheBar OR t1.t1_SomeFoo = @fooParameter",
                 new List<IDbDataParameter>
                 {
                     new SqlParameter
@@ -106,7 +106,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                     {
                         ParameterName = "@itsFridayLetsGoToTheBar",
                         SqlDbType = SqlDbType.NVarChar,
-                        Value = testClass.Bar
+                        Value = TestFixture.Bar
                     },
                     new SqlParameter
                     {
@@ -116,7 +116,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                     }
                 });
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), tableAlias:"t1", fieldPrefix:"t1_");
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), tableAlias:"t1", fieldPrefix:"t1_");
             Expression<Action<SqlParameter, SqlParameter>> compareExpression =
                 (e, a) => CompareParameters(e, a);
 
@@ -144,14 +144,14 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
 
             Asserter
                 .AssertException<InvalidOperationException>(
-                    () => SystemUnderTest.BuildContainer(expression, typeof(TestClass)))
+                    () => SystemUnderTest.BuildContainer(expression, typeof(TestFixture)))
                 .AndVerifyMessageContains("Cannot build query.  Property has no metadata attributes: SomeProperty");
         }
 
         [Test]
         public void WillHandleStartsWithClauses()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
                     expression = t => t.Bar.StartsWith("Hink");
@@ -159,7 +159,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                     expected = new QueryContainer(
                         "PioneerSquareBar LIKE ('Hink%')");
 
-                    var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+                    var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
 
                     Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -167,7 +167,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleStartsWithClausesWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.StartsWith("Hink");
@@ -175,7 +175,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "t1.t1_PioneerSquareBar LIKE ('Hink%')");
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -184,7 +184,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleContainsClauses()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.Contains("yikes");
@@ -192,7 +192,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "PioneerSquareBar LIKE ('%yikes%')");
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -200,7 +200,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleContainsClausesWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.Contains("yikes");
@@ -208,7 +208,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "t1.t1_PioneerSquareBar LIKE ('%yikes%')");
        
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -217,7 +217,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleEndsWithClauses()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.EndsWith("yikes");
@@ -225,7 +225,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "PioneerSquareBar LIKE ('%yikes')");
         
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -233,7 +233,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleEndsWithClausesWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.EndsWith("yikes");
@@ -241,7 +241,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "t1.t1_PioneerSquareBar LIKE ('%yikes')");
         
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -250,7 +250,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleStringEqualsClauses()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.Equals("yikes");
@@ -258,7 +258,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "PioneerSquareBar = 'yikes'");
        
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -266,7 +266,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleStringEqualsClausesWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Bar.Equals("yikes");
@@ -274,7 +274,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             expected = new QueryContainer(
                 "t1.t1_PioneerSquareBar = 'yikes'");
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -283,15 +283,15 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleIntEqualsClauses()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Id.Equals(5);
 
             expected = new QueryContainer(
-                "TestClassId = 5");
+                "TestFixtureId = 5");
 
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -299,15 +299,15 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         [Test]
         public void WillHandleIntEqualsClausesWithPrefix()
         {
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
             QueryContainer expected = null;
 
             expression = t => t.Id.Equals(5);
 
             expected = new QueryContainer(
-                "t1.t1_TestClassId = 5");
+                "t1.t1_TestFixtureId = 5");
        
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -317,13 +317,13 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         public void WillHandleEqualsNullClause()
         {
             QueryContainer expected = null;
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
 
             expression = t => t.Bar.Equals(null);
 
             expected = new QueryContainer("PioneerSquareBar IS NULL");
         
-            var actual = SystemUnderTest.BuildContainer(expression, typeof (TestClass));
+            var actual = SystemUnderTest.BuildContainer(expression, typeof (TestFixture));
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
         }
@@ -332,13 +332,13 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
         public void WillHandleEqualsNullClauseWithPrefix()
         {
             QueryContainer expected = null;
-            Expression<Func<TestClass, bool>> expression = null;
+            Expression<Func<TestFixture, bool>> expression = null;
 
             expression = t => t.Bar.Equals(null);
 
             expected = new QueryContainer("t1.t1_PioneerSquareBar IS NULL");
        
-            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestClass), 
+            var actual = SystemUnderTest.BuildContainer(expression, typeof(TestFixture), 
                 tableAlias:"t1", fieldPrefix:"t1_");
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "OrderByClause" });
@@ -512,11 +512,11 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             Assert.AreEqual(expected.Value, actual.Value);
         }
 
-        private TypeMapping GetTestClassTypeMapping()
+        private TypeMapping GetTestFixtureTypeMapping()
         {
             return new TypeMapping
             {
-                Type = typeof(TestClass),
+                Type = typeof(TestFixture),
                 DataSource = "dbo.TestTable",
                 PropertyMappings = GetPropertyMappings()
             };
@@ -530,7 +530,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                 {
                     IsIdentity = true,
                     DatabaseType = SqlDbType.Int,
-                    Field = "TestClassId",
+                    Field = "TestFixtureId",
                     AllowDbNull = false, 
                     IsPrimaryKey = true,
                     IsPrimitive = true,

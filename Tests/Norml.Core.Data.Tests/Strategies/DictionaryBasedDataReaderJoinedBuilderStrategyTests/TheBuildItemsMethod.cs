@@ -4,6 +4,14 @@ using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
+using Moq;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.Repositories.Strategies;
+using Norml.Core.Extensions;
+using Norml.Core.Tests.Common;
+using Norml.Core.Tests.Common.Base;
+using Norml.Core.Tests.Common.Extensions;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilderStrategyTests
 {

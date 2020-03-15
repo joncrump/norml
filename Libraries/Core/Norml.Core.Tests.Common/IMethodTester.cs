@@ -6,7 +6,7 @@ namespace Norml.Core.Tests.Common
 {
     public interface IMethodTester
     {
-        void TestMethodParameters<TItemUnderTest>(string methodName, 
+        void TestParameters<TItemUnderTest>(string methodName, 
             IEnumerable<string> parametersToSkip = null)
             where TItemUnderTest : class;
         void TestParameters<TItemUnderTest>(IEnumerable<ParameterInfo> parameters, 
@@ -14,7 +14,7 @@ namespace Norml.Core.Tests.Common
             where TItemUnderTest : class;
         IEnumerable<object> InitializeMethodParameters(IList<ParameterInfo> parameters);
         void AddInstance(IList<ParameterInfo> parameters, IList<Object> instances, int index);
-        IEnumerable<string> TestMethodInfoForNullParameter(MethodInfo method, object instance);
+        IEnumerable<string> TestInfoForNullParameter(MethodInfo method, object instance);
         TItemUnderTest ConstructInstance<TItemUnderTest>()
             where TItemUnderTest : class;
         IEnumerable<object> InitializeParameters(IList<ParameterInfo> parameters);

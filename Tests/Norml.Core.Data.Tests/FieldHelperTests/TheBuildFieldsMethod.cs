@@ -37,14 +37,14 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
 //                TableName = "dbo.TestTable", 
 //                FieldMappings = new Dictionary<string, FieldParameterMapping>
 //                    {
-//                        {"Id", new FieldParameterMapping("TestClassId", "@id", SqlDbType.Int, null, true)},
+//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, null, true)},
 //                        {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar)},
 //                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar)}
 //                    }
 //            };
     
             throw new NotImplementedException();
-//            var actual = SystemUnderTest.BuildFields<TestClass>();
+//            var actual = SystemUnderTest.BuildFields<TestFixture>();
 //            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression = 
 //                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNull(f, null));
 //
@@ -61,17 +61,17 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         public void WillReturnFieldsWithInstance()
         {
             TableObjectMapping expected = null;
-            TestClass model = null;
+            TestFixture model = null;
 
             throw new NotImplementedException();
-//            model = ObjectCreator.CreateNew<TestClass>();
+//            model = ObjectCreator.CreateNew<TestFixture>();
 //
 //            expected = new TableObjectMapping
 //            {
 //                TableName = "dbo.TestTable", 
 //                FieldMappings = new Dictionary<string, FieldParameterMapping>
 //                    {
-//                        {"Id", new FieldParameterMapping("TestClassId", "@id", SqlDbType.Int, model.Id, true)},
+//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
 //                        {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar, model.Foo)},
 //                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
 //                    }
@@ -94,17 +94,17 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         public void WillReturnSelectedFieldsWithInstance()
         {
             TableObjectMapping expected = null;
-            TestClass model = null;
+            TestFixture model = null;
 
             throw new NotImplementedException();
-//            model = ObjectCreator.CreateNew<TestClass>();
+//            model = ObjectCreator.CreateNew<TestFixture>();
 //
 //            expected = new TableObjectMapping
 //            {
 //                TableName = "dbo.TestTable", 
 //                FieldMappings = new Dictionary<string, FieldParameterMapping>
 //                    {
-//                        {"Id", new FieldParameterMapping("TestClassId", "@id", SqlDbType.Int, model.Id, true)},
+//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
 //                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
 //                    }
 //            };
@@ -129,7 +129,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
 
             tableName = DataGenerator.GenerateString();
 
-            var actual = SystemUnderTest.BuildFields<TestClass>(tableName: tableName);
+            var actual = SystemUnderTest.BuildFields<TestFixture>(tableName: tableName);
 
             Asserter.AssertEquality(tableName, actual.TableName);
         }
@@ -141,7 +141,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
 
             alias = DataGenerator.GenerateString();
 
-            var actual = SystemUnderTest.BuildFields<TestClass>(alias: alias);
+            var actual = SystemUnderTest.BuildFields<TestFixture>(alias: alias);
 
             Asserter.AssertEquality(alias, actual.Alias);
         }

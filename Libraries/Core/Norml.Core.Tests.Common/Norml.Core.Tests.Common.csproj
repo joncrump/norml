@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.5.28" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Norml.Core\Norml.Core.csproj" />
+  </ItemGroup>
+
 </Project>

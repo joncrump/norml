@@ -2,10 +2,10 @@
 
 namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
 {
-    [TestClass]
+    [TestFixture]
     public class TheParentPropertyProperty : MsTestBase
     {
-        [TestMethod]
+        [Test]
         public void WillReturnLeftKeyIfParentPropertyPassedToConstructorIsNull()
         {
             var expected = String.Empty;
@@ -25,7 +25,7 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 });
         }
 
-        [TestMethod]
+        [Test]
         public void WillReturnLeftKeyIfParentPropertyPassedToConstructorIsEmpty()
         {
             var expected = String.Empty;
@@ -45,7 +45,7 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
                 });
         }
 
-        [TestMethod]
+        [Test]
         public void WillReturnParentPropertyIfParentPropertyPassedToConstructorHasValue()
         {
             var expected = String.Empty;

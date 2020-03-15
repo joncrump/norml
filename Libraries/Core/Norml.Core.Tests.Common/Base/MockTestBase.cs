@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Helpers;
 
 namespace Norml.Core.Tests.Common.Base

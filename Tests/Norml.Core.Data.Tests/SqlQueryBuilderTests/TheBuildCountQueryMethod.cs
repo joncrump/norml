@@ -9,7 +9,7 @@
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Setup(x => x.GetBuilderStrategy(QueryKind.Count))
                 .Returns(new Mock<IQueryBuilderStrategy>().Object);
-            SystemUnderTest.BuildCountQuery<TestClass>();
+            SystemUnderTest.BuildCountQuery<TestFixture>();
 
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Verify(x => x.GetBuilderStrategy(QueryKind.Count), Times.Once);

@@ -29,7 +29,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.DeleteQueryBuilder
         {
             Asserter
                 .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildQuery<TestClass>(null))
+                    () => SystemUnderTest.BuildQuery<TestFixture>(null))
                 .AndVerifyHasParameter("parameters");
         }
 
@@ -37,25 +37,25 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.DeleteQueryBuilder
         public void WillBuildDeleteQueryWithPredicate()
         {
             QueryInfo expected = null;
-            TestClass testClass;
+            TestFixture TestFixture;
             IEnumerable<IDbDataParameter> expectedParameters = null;
 
-            testClass = ObjectCreator.CreateNew<TestClass>();
+            TestFixture = ObjectCreator.CreateNew<TestFixture>();
             var whereClause = DataGenerator.GenerateString();
             var expectedQuery = "DELETE FROM dbo.TestTable WHERE {0};"
                 .FormatString(whereClause);
             expectedParameters = new List<IDbDataParameter>
             {
-                new SqlParameter("@id", SqlDbType.Int) {Value = testClass.Id},
+                new SqlParameter("@id", SqlDbType.Int) {Value = TestFixture.Id},
             };
             Mocks.Get<IPredicateBuilder>()
-                .Setup(x => x.BuildContainer(It.IsAny<Expression<Func<TestClass, bool>>>(), It.IsAny<Type>(), true, It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(x => x.BuildContainer(It.IsAny<Expression<Func<TestFixture, bool>>>(), It.IsAny<Type>(), true, It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new QueryContainer(whereClause, expectedParameters));
 
             expected = new QueryInfo(expectedQuery, It.IsAny<TableObjectMapping>(), expectedParameters);
 
             Mocks.Get<IFieldHelper>()
-                .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), It.IsAny<TestClass>(), It.IsAny<bool>(), 
+                .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), It.IsAny<TestFixture>(), It.IsAny<bool>(), 
                     It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new TableObjectMapping
                 {
@@ -66,13 +66,13 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.DeleteQueryBuilder
                         }
                 });
 
-            Expression<Func<TestClass, bool>> predicate = t => t.Bar == "Joe's Bar";
+            Expression<Func<TestFixture, bool>> predicate = t => t.Bar == "Joe's Bar";
             dynamic parameters = new ExpandoObject();
 
             parameters.Predicate = predicate;
             parameters.TableName = null;
 
-            QueryInfo actual = SystemUnderTest.BuildQuery<TestClass>(parameters);
+            QueryInfo actual = SystemUnderTest.BuildQuery<TestFixture>(parameters);
             Expression<Action<SqlParameter, SqlParameter>> expression =
                 (e, a) => CompareSqlParameters(e, a);
 
