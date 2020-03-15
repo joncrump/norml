@@ -1,7 +1,7 @@
-﻿using Norml.Common.Data.Helpers;
-using Norml.Common.Data.Mappings;
+﻿using Norml.Core.Data.Helpers;
+using Norml.Core.Data.Mappings;
 
-namespace Norml.Common.Data.QueryBuilders.Strategies.TSql
+namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {
     public class CountQueryBuilderStrategy : QueryBuilderStrategyBase, IQueryBuilderStrategy
     {

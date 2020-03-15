@@ -1,4 +1,4 @@
-﻿namespace Norml.Common
+﻿namespace Norml.Core
 {
     public interface IOrderable
     {

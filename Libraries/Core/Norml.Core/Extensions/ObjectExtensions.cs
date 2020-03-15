@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Norml.Common.Extensions
+namespace Norml.Core.Extensions
 {
     public static class ObjectExtensions
     {

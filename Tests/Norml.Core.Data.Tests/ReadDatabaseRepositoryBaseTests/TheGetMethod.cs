@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Tests.ReadDatabaseRepositoryBaseTests;
-using Norml.Tests.Common.Base;
-
-namespace Norml.Common.Data.Tests.ReadDatabaseRepositoryBaseTests
+namespace Norml.Core.Data.Tests.ReadDatabaseRepositoryBaseTests
 {
     [TestFixture]
     public class TheGetMethod : MockTestBase<TestableReadDatabaseRepository>

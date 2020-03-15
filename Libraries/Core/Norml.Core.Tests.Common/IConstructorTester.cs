@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public interface IConstructorTester
     {

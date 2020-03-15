@@ -1,4 +1,4 @@
-﻿namespace Norml.Tests.Common
+﻿namespace Norml.Core.Tests.Common
 {
     public static class Constants
     {

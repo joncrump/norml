@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Linq.Expressions;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Extensions;
-using Norml.Tests.Common;
-using Norml.Tests.Common.Base;
-using Norml.Tests.Common.Data;
 
-namespace Norml.Common.Data.Tests.ReflectionBasedDataReaderBuilderTests
+namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
 {
     [TestFixture]
     public class TheBuildMethod : MockTestBase<ReflectionBasedDataReaderBuilder>

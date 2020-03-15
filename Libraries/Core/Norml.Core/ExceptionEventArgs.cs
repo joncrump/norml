@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public class ExceptionEventArgs : EventArgs
     {

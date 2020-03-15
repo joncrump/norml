@@ -1,4 +1,4 @@
-﻿namespace Norml.Tests.Common.DataHelpers
+﻿namespace Norml.Core.Tests.Common.DataHelpers
 {
     public class DatabaseDataHelper 
     {

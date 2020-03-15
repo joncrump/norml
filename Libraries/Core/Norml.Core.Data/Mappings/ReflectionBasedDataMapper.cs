@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.Helpers;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.Helpers;
 
-namespace Norml.Common.Data.Mappings
+namespace Norml.Core.Data.Mappings
 {
     public class ReflectionBasedDataMapper : IDataMapper
     {

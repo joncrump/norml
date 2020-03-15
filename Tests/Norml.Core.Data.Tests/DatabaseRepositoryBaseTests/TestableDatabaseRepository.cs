@@ -1,7 +1,4 @@
-﻿using Norml.Common.Data.Repositories;
-using Norml.Common.Data.Repositories.Strategies;
-
-namespace Norml.Common.Data.Tests.DatabaseRepositoryBaseTests
+﻿namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 {
     public class TestableDatabaseRepository : DatabaseRepositoryBase
     {

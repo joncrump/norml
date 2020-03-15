@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data.QueryBuilders.Strategies.TSql
+namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {
     public class InsertQueryBuilderStrategy : QueryBuilderStrategyBase, IQueryBuilderStrategy
     {

@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
-using System.Linq;
 using System.Linq.Expressions;
-using Moq;
-using Norml.Common.Data.QueryBuilders.Strategies.TSql;
-using NUnit.Framework;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderStrategyTests
+namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderStrategyTests
 {
     [TestFixture]
     public class TheBuildQueryMethod : MockTestBase<PagedQueryBuilderStrategy>

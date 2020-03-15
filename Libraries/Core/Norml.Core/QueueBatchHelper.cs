@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Norml.Common.Extensions;
-using Norml.Common.Helpers;
+using Norml.Core.Extensions;
+using Norml.Core.Helpers;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public class QueueBatchHelper : EventProcessorBase, IBatchHelper
     {

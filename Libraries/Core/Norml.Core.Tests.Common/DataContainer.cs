@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public class DataContainer
     {

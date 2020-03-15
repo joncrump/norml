@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using Norml.Common.Exceptions;
-using Norml.Common.Extensions;
+using Norml.Core.Exceptions;
+using Norml.Core.Extensions;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public static class Guard
     {

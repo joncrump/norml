@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public class ResourcesInfo : IResourcesInfo
     {

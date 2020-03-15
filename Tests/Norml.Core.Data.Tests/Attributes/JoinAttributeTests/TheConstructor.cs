@@ -1,11 +1,6 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using TightlyCurly.Com.Common.Data.Attributes;
-using TightlyCurly.Com.Common.Exceptions;
-using TightlyCurly.Com.Tests.Common.MsTest;
 
-namespace TightlyCurly.Com.Common.Data.Tests.Attributes.JoinAttributeTests
+namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
 {
     [TestClass]
     public class TheConstructor : MsTestBase

@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.QueryBuilders.Strategies.TSql;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace Norml.Common.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryBuilderStrategyTests
+namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryBuilderStrategyTests
 {
     [TestFixture]
     public class TheBuildQueryMethod : MockTestBase<SelectSingleQueryBuilderStrategy>

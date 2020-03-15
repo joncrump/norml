@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using Moq;
-using NUnit.Framework;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.DatabaseRepositoryBaseTests
+namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 {
     [TestFixture]
     public class TheExecuteTransformMethod : MockTestBase<TestableDatabaseRepository>

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
-using System.Reflection;
 //using Norml.Common.Data.Attributes;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class ReflectionBasedDataReaderBuilder : ValueFactoryBuilderBase, IDataReaderBuilder
     {

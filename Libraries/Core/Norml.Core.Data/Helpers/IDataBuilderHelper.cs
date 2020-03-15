@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Norml.Common.Data.Helpers
+namespace Norml.Core.Data.Helpers
 {
     public interface IDataBuilderHelper
     {

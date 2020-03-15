@@ -5,10 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Norml.Common.Data.Mappings;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Mappings;
 
-namespace Norml.Common.Data.QueryBuilders.Strategies.TSql
+namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {
     public class SelectJoinedQueryBuilderStrategy : QueryBuilderStrategyBase, IQueryBuilderStrategy
     {

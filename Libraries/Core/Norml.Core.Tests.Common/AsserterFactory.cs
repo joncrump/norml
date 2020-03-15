@@ -1,7 +1,7 @@
 ﻿using System;
-using Norml.Tests.Common.Helpers;
+using Norml.Core.Tests.Common.Helpers;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public static class AsserterFactory
     {

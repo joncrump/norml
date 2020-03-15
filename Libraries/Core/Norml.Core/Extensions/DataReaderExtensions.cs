@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Norml.Common.Extensions
+namespace Norml.Core.Extensions
 {
     public static class DataReaderExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Norml.Common.Actions;
+using Norml.Core.Actions;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public abstract class EventProcessorBase
     {

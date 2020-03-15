@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using Norml.Common;
 
-namespace Norml.Tests.Common.Base
+namespace Norml.Core.Tests.Common.Base
 {
     public class PropertyBag
     {

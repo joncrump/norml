@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Norml.Common;
-using Norml.Common.Extensions;
+﻿using System.Collections.Generic;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public class ColumnInfo
     {

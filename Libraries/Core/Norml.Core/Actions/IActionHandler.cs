@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Actions
+﻿namespace Norml.Core.Actions
 {
     public delegate void ProcessEventHandler(object sender, ProcessEventArgs eventArgs);
 

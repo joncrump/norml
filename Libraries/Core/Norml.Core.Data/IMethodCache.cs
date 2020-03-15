@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IMethodCache
     {

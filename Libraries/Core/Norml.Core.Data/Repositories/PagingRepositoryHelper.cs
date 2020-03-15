@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
-using Norml.Common.Helpers;
+using Norml.Core.Data.QueryBuilders;
+using Norml.Core.Data.Repositories.Strategies;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public class PagingRepositoryHelper<TInterface, TModel> : ReadDatabaseRepositoryBase<TInterface, TModel>
         where TModel : class, TInterface, new()

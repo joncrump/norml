@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using Norml.Common.Data.Repositories.Strategies;
+using Norml.Core.Data.Repositories.Strategies;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IDatabaseWrapper
     {

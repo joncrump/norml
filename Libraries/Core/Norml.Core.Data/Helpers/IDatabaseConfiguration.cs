@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data.Helpers
+﻿namespace Norml.Core.Data.Helpers
 {
     public interface IDatabaseConfiguration
     {

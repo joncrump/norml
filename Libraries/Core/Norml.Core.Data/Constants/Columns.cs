@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data.Constants
+﻿namespace Norml.Core.Data.Constants
 {
     public static class Columns
     {

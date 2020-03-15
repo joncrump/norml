@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public interface IObjectCreator
     {

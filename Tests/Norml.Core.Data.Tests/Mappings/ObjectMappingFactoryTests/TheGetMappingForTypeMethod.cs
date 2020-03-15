@@ -1,10 +1,6 @@
 ﻿using System;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Mappings;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.ObjectMappingFactoryTests
+namespace Norml.Core.Data.Tests.Mappings.ObjectMappingFactoryTests
 {
     [TestFixture]
     public class TheGetMappingForTypeMethod : MockTestBase<ObjectMapperFactory>

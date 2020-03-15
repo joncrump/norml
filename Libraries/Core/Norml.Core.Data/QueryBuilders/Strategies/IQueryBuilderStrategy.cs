@@ -1,5 +1,5 @@
 ﻿
-namespace Norml.Common.Data.QueryBuilders.Strategies
+namespace Norml.Core.Data.QueryBuilders.Strategies
 {
     public interface IQueryBuilderStrategy
     {

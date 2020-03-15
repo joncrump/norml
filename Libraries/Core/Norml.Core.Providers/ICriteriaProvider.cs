@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Norml.Providers.Common
+namespace Norml.Core.Providers
 {
     public interface ICriteriaProvider<out TInterface>
     {

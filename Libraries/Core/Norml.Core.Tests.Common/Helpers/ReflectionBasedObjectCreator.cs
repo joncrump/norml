@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
+using Norml.Core.Tests.Common.Base;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public class ReflectionBasedObjectCreator : UtilityBase, IObjectCreator
     {

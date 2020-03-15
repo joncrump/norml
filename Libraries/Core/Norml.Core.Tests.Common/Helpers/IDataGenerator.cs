@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public interface IDataGenerator
     {

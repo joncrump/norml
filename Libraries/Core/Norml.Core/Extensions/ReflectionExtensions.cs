@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Norml.Common.Extensions
+namespace Norml.Core.Extensions
 {
     public static class ReflectionExtensions
     {

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq.Expressions;
-using NUnit.Framework;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.FieldHelperTests
+namespace Norml.Core.Data.Tests.FieldHelperTests
 {
     [TestFixture]
     public class TheBuildFieldsMethod : MockTestBase<FieldHelper>

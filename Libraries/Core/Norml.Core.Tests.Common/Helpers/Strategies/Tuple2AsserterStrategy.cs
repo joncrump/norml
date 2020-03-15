@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class Tuple2AsserterStrategy<TItem1, TItem2> : AsserterStrategyBase<Tuple<TItem1, TItem2>>
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Norml.Common.Data.Attributes;
 
-namespace Norml.Common.Data.Tests
+namespace Norml.Core.Data.Tests
 {
     [Table("dbo.TestTable")]
     public class TestClass

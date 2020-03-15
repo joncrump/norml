@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public interface IResourcesHelper
     {

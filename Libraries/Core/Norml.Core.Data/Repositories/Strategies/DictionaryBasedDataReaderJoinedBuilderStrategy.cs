@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Norml.Common.Data.Helpers;
-using Norml.Common.Data.Mappings;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Helpers;
+using Norml.Core.Data.Mappings;
 
-namespace Norml.Common.Data.Repositories.Strategies
+namespace Norml.Core.Data.Repositories.Strategies
 {
     public class DictionaryBasedDataReaderJoinedBuilderStrategy : DataReaderBuilderStrategyBase, IBuilderStrategy
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Norml.Common.Actions;
+using Norml.Core.Actions;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public interface IBatchHelper
     {

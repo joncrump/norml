@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Norml.Common.Data.Constants;
-using Norml.Common.Exceptions;
-using NUnit.Framework;
-using Norml.Tests.Common.Base;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace Norml.Common.Data.Tests.ValueFactoryTests
+namespace Norml.Core.Data.Tests.ValueFactoryTests
 {
     [TestFixture]
     public class TheAddValueFactoryMethod : MockTestBase<TestableValueFactory>

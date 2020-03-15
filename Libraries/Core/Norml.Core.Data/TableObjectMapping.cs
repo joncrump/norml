@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class TableObjectMapping
     {

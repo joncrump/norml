@@ -1,6 +1,6 @@
-﻿using Norml.Common.Data.Repositories;
+﻿using Norml.Core.Data.Repositories;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IEntityRepository<TModel> : IWriteRepository<TModel>,
         IReadRepository<TModel>

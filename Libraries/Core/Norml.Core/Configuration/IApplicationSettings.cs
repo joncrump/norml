@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Configuration
+namespace Norml.Core.Configuration
 {
     public interface IApplicationSettings
     {

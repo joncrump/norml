@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Norml.Providers.Common
+namespace Norml.Core.Providers
 {
     public interface IWriteProvider<TInterface>
     {

@@ -1,9 +1,6 @@
 ﻿using System;
-using NUnit.Framework;
-using Norml.Common.Helpers;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Tests.Helpers.HashHelperTests
+namespace Norml.Core.Tests.Helpers.HashHelperTests
 {
     [TestFixture]
     public class TheGenerateHashMethod : MockTestBase<HashHelper>

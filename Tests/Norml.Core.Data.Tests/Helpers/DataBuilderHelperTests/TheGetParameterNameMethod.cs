@@ -1,8 +1,4 @@
-﻿using NUnit.Framework;
-using Norml.Common.Data.Helpers;
-using Norml.Tests.Common.Base;
-
-namespace Norml.Common.Data.Tests.Helpers.DataBuilderHelperTests
+﻿namespace Norml.Core.Data.Tests.Helpers.DataBuilderHelperTests
 {
     [TestFixture]
     public class TheGetParameterNameMethod : MockTestBase<DataBuilderHelper>

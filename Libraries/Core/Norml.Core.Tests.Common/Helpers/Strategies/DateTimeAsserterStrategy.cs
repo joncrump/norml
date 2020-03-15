@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class DateTimeAsserterStrategy : AsserterStrategyBase<DateTime>
     {

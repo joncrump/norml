@@ -1,6 +1,6 @@
-﻿using Norml.Common.Data.QueryBuilders.Strategies;
+﻿using Norml.Core.Data.QueryBuilders.Strategies;
 
-namespace Norml.Common.Data.QueryBuilders
+namespace Norml.Core.Data.QueryBuilders
 {
     public class QueryBuilderStrategyFactory : IQueryBuilderStrategyFactory
     {

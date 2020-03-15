@@ -1,11 +1,6 @@
 ﻿using System;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.QueryBuilders.Strategies.TSql;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.QueryBuilders.Strategies.TSql.CountQueryBuilderStrategyTests
+namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.CountQueryBuilderStrategyTests
 {
     [TestFixture]
     public class TheBuildQueryMethod : MockTestBase<CountQueryBuilderStrategy>

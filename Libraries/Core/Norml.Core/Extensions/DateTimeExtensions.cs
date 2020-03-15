@@ -1,6 +1,6 @@
 using System;
 
-namespace Norml.Common.Extensions
+namespace Norml.Core.Extensions
 {
     public static class DateTimeUtilities
     {

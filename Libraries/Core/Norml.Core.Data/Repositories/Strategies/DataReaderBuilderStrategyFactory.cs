@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data.Repositories.Strategies
+﻿namespace Norml.Core.Data.Repositories.Strategies
 {
     public class DataReaderBuilderStrategyFactory : IBuilderStrategyFactory
     {

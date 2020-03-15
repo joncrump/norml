@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Norml.Common.Data.Mappings
+﻿namespace Norml.Core.Data.Mappings
 {
     public interface IObjectMapperFactory
     {

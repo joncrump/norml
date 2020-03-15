@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public interface ITransactionWrapper : IDisposable
     {

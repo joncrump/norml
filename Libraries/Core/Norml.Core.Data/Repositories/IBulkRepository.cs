@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public interface IBulkRepository<in TInterface>
     {

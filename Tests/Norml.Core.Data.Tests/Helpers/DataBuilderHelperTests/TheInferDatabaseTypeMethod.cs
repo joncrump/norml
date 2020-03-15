@@ -1,10 +1,7 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Data;
-using Norml.Common.Data.Helpers;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.Helpers.DataBuilderHelperTests
+namespace Norml.Core.Data.Tests.Helpers.DataBuilderHelperTests
 {
     [TestFixture]
     public class TheInferDatabaseTypeMethod : MockTestBase<DataBuilderHelper>

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Tests.Common.Base;
 
-
-namespace Norml.Common.Data.Tests.WriteDatabaseRepositoryBaseTests
+namespace Norml.Core.Data.Tests.WriteDatabaseRepositoryBaseTests
 {
     [TestFixture]
     public class TheDeleteMethod : MockTestBase<TestableWriteDatabaseRepository>

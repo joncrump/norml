@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class ParameterInfo
     {

@@ -4,16 +4,7 @@ using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
 
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.QueryBuilders.Strategies;
-using Norml.Common.Data.QueryBuilders.Strategies.TSql;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
-
-namespace Norml.Common.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryBuilderStrategyTests
+namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryBuilderStrategyTests
 {
     [TestFixture]
     public class TheBuildQueryMethod : MockTestBase<SelectJoinedQueryBuilderStrategy>

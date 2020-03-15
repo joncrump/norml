@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Norml.Common.Data.Attributes
+namespace Norml.Core.Data.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldMetadataAttribute : Attribute, IOrderable

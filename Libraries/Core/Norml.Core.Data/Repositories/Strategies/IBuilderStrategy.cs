@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Norml.Common.Data.Repositories.Strategies
+namespace Norml.Core.Data.Repositories.Strategies
 {
     public interface IBuilderStrategy
     {

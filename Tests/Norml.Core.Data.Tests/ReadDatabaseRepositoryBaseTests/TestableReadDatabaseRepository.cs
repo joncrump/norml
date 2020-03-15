@@ -1,9 +1,4 @@
-﻿using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Repositories;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Helpers;
-
-namespace Norml.Common.Data.Tests.ReadDatabaseRepositoryBaseTests
+﻿namespace Norml.Core.Data.Tests.ReadDatabaseRepositoryBaseTests
 {
     public class TestableReadDatabaseRepository : ReadDatabaseRepositoryBase<ITestModel, TestModel>
     {

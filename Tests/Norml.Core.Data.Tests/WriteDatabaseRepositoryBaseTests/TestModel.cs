@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Data.Tests.WriteDatabaseRepositoryBaseTests
+namespace Norml.Core.Data.Tests.WriteDatabaseRepositoryBaseTests
 {
     public class TestModel : ITestModel
     {

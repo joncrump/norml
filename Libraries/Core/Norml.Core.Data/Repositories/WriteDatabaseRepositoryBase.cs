@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
-using Norml.Common.Helpers;
+using Norml.Core.Data.QueryBuilders;
+using Norml.Core.Data.Repositories.Strategies;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public abstract class WriteDatabaseRepositoryBase<TInterface, TModel> 
         : ReadDatabaseRepositoryBase<TInterface, TModel> 

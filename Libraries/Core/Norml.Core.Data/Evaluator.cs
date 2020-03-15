@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     // Another class shamelessly borrowed from http://stackoverflow.com/questions/5184253/how-to-log-a-predicate-expression
     public static class Evaluator

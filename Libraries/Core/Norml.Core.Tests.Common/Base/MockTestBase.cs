@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Moq;
-using Norml.Common;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Helpers;
+using Norml.Core.Tests.Common.Helpers;
 
-namespace Norml.Tests.Common.Base
+namespace Norml.Core.Tests.Common.Base
 {
     public abstract class MockTestBase<TItemUnderTest> : TestBase where TItemUnderTest : class
     {

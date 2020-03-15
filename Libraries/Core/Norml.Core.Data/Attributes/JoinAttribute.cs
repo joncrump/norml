@@ -1,7 +1,6 @@
 ﻿using System;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data.Attributes
+namespace Norml.Core.Data.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class JoinAttribute : Attribute

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IModelDataConverter
     {

@@ -1,9 +1,4 @@
-﻿using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Repositories;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Helpers;
-
-namespace Norml.Common.Data.Tests.WriteDatabaseRepositoryBaseTests
+﻿namespace Norml.Core.Data.Tests.WriteDatabaseRepositoryBaseTests
 {
     public class TestableWriteDatabaseRepository : WriteDatabaseRepositoryBase<ITestModel, TestModel>
     {

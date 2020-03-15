@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
-using System.Xml;
 
-namespace Norml.Common.Data.Helpers
+namespace Norml.Core.Data.Helpers
 {
     public class DataBuilderHelper : IDataBuilderHelper
     {

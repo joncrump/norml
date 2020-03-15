@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class AsserterStrategyFactory : IAsserterStrategyFactory
     {

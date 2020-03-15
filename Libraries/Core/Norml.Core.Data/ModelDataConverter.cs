@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.Mappings;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Mappings;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class ModelDataConverter : IModelDataConverter
     {

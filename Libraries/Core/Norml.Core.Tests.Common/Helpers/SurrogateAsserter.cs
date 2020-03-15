@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Helpers.Strategies;
+using Norml.Core.Tests.Common.Helpers.Strategies;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public class SurrogateAsserter : IAssertHelper
     {

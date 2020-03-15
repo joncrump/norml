@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Actions
+namespace Norml.Core.Actions
 {
     public abstract class ActionHandlerBase
     {

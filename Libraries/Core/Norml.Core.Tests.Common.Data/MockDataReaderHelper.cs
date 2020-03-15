@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 //using Norml.Common.Data.Attributes;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Data
+namespace Norml.Core.Tests.Common.Data
 {
     public class MockDataReaderHelper : IDataReaderHelper
     {

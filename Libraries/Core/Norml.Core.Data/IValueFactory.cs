@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IValueFactory
     {

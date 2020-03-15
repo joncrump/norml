@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public class MappedType
     {

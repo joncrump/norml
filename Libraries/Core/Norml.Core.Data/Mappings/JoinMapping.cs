@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Norml.Common.Data.Mappings
+﻿namespace Norml.Core.Data.Mappings
 {
     public class JoinMapping : IJoinMapping
     {

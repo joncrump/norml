@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public interface IExportableRepository<out TInterface>
     {

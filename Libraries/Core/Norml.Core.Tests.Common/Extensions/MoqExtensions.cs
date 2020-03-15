@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Moq.Language.Flow;
 
-namespace Norml.Tests.Common.Extensions
+namespace Norml.Core.Tests.Common.Extensions
 {
     public static class MoqExtensions
     {

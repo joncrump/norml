@@ -1,12 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Linq.Expressions;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
-using Norml.Common.Helpers;
-
-namespace Norml.Common.Data.Repositories
+﻿namespace Norml.Core.Data.Repositories
 {
     //public abstract class ExportableDatabaseRepositoryBase<TInterface, TModel> : PagingDatabaseRepositoryBase<TInterface, TModel>
     //    where TModel : class, TInterface, new()

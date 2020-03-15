@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class DatabaseSettings : IDatabaseSettings
     {

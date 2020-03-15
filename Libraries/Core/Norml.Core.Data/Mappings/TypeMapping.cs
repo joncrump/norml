@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Norml.Common.Data.Mappings
+namespace Norml.Core.Data.Mappings
 {
     public class TypeMapping
     {

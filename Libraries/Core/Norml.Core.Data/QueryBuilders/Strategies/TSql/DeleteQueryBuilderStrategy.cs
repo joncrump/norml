@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Text;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data.QueryBuilders.Strategies.TSql
+namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {
     public class DeleteQueryBuilderStrategy : QueryBuilderStrategyBase, IQueryBuilderStrategy
     {

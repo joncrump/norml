@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using Norml.Common.Extensions;
-
-namespace Norml.Common.Configuration
+﻿namespace Norml.Core.Configuration
 {
     public class NameTypeElementCollection : ConfigurationElementCollection
     {

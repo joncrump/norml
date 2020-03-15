@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data.QueryBuilders.Strategies
+﻿namespace Norml.Core.Data.QueryBuilders.Strategies
 {
     public abstract class QueryBuilderStrategyBase
     {

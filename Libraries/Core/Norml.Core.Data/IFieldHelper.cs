@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public interface IFieldHelper
     {

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Repositories.Strategies;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class SqlDatabaseWrapper : IDatabaseWrapper
     {

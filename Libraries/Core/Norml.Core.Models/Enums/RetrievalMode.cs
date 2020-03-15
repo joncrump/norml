@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Model.Enums
+﻿namespace Norml.Core.Models.Enums
 {
     public enum RetrievalMode
     {

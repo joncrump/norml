@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class TypeAsserterStrategy : AsserterStrategyBase<Type>
     {

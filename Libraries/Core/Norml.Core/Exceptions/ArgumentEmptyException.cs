@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Exceptions
+namespace Norml.Core.Exceptions
 {
     public class ArgumentEmptyException : ArgumentException
     {

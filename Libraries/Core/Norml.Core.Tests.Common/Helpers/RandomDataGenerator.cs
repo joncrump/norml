@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public class RandomDataGenerator : IDataGenerator
     {

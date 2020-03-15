@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public interface IReflectionHelper
     {

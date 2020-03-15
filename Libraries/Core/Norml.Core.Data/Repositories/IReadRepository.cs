@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public interface IReadRepository<out TInterface>
     {

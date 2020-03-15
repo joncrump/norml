@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data
+﻿namespace Norml.Core.Data
 {
     public class Join
     {

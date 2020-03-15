@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common.Data.Attributes
+namespace Norml.Core.Data.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class TableAttribute : Attribute

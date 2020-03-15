@@ -1,4 +1,4 @@
-﻿namespace Norml.Common.Data.QueryBuilders
+﻿namespace Norml.Core.Data.QueryBuilders
 {
     public enum QueryKind
     {

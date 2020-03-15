@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq.Expressions;
-using Norml.Common.Extensions;
 
-namespace Norml.Common.Data.QueryBuilders
+namespace Norml.Core.Data.QueryBuilders
 {
     public class SqlQueryBuilder : IQueryBuilder
     {

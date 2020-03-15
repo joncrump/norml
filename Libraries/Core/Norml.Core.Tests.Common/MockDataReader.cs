@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Moq;
-using Norml.Common;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common
+namespace Norml.Core.Tests.Common
 {
     public class MockDataReader : IDataReader, IEquatable<MockDataReader>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Norml.Common.Extensions;
+using Norml.Core.Extensions;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public class RetryHelper : IRetryHelper
     {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Norml.Common;
-using Norml.Common.Data;
 
-namespace Norml.Providers.Common
+namespace Norml.Core.Providers
 {
     public interface IExportableProvider<out TInterface>
     {

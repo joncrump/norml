@@ -1,4 +1,4 @@
-﻿namespace Norml.Tests.Common.Helpers.Strategies
+﻿namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public interface IAsserterStrategyFactory
     {

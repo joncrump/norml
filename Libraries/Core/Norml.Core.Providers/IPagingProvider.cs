@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Norml.Common;
 
-namespace Norml.Providers.Common
+namespace Norml.Core.Providers
 {
     public interface IPagingProvider
     {

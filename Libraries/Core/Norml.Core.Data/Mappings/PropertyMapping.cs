@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace Norml.Common.Data.Mappings
+namespace Norml.Core.Data.Mappings
 {
     public class PropertyMapping
     {

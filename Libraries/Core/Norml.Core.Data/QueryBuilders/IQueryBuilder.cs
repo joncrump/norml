@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Norml.Common.Data.QueryBuilders
+namespace Norml.Core.Data.QueryBuilders
 {
     public interface IQueryBuilder
     {

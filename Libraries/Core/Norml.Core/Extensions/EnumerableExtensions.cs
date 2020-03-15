@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace Norml.Common.Extensions
+namespace Norml.Core.Extensions
 {
     public static class EnumerableExtensions
     {

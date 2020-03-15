@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Providers.Common
+namespace Norml.Core.Providers
 {
     public interface IReadProvider<out TInterface, TIdType>
     {

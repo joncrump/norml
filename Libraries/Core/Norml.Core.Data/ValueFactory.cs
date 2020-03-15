@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using Norml.Common.Data.Constants;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Constants;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class ValueFactory : IValueFactory
     {

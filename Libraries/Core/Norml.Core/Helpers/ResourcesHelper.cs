@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Resources;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public class ResourcesHelper : IResourcesHelper
     {

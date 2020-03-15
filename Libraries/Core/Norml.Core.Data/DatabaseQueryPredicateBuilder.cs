@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.Constants;
-using Norml.Common.Data.Helpers;
-using Norml.Common.Data.Mappings;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.Helpers;
+using Norml.Core.Data.Mappings;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     // This code was influenced from http://stackoverflow.com/questions/7731905/how-to-convert-an-expression-tree-to-a-partial-sql-query
     public class DatabaseQueryPredicateBuilder : ExpressionVisitor, IPredicateBuilder

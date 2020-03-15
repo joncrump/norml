@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Linq.Expressions;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Mappings;
-using Norml.Common.Extensions;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.DatabaseQueryPredicateBuilderTests
+namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
 {
     [TestFixture]
     public class TheBuildContainerMethod : MockTestBase<DatabaseQueryPredicateBuilder>

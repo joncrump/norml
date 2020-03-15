@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Norml.Tests.Common.Base;
-using Norml.Tests.Common.Helpers;
-
-namespace Norml.Tests.Common.Data
+﻿namespace Norml.Core.Tests.Common.Data
 {
     public abstract class MockDataItemTestBase<TItemUnderTest> : MockTestBase<TItemUnderTest>
         where TItemUnderTest : class

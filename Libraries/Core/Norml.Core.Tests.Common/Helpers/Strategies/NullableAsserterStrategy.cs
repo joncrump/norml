@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class NullableAsserterStrategy<TValue> : AsserterStrategyBase<TValue?> where TValue : struct 
     {

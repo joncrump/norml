@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Norml.Tests.Common.Data
+namespace Norml.Core.Tests.Common.Data
 {
     public interface IDataReaderHelper
     {

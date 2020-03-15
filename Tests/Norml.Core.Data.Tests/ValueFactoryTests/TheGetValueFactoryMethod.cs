@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Norml.Common.Exceptions;
-using NUnit.Framework;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.ValueFactoryTests
+namespace Norml.Core.Data.Tests.ValueFactoryTests
 {
     [TestFixture]
     public class TheGetValueFactoryMethod : MockTestBase<TestableValueFactory>

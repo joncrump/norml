@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Norml.Common.Data.Constants
+namespace Norml.Core.Data.Constants
 {
     public static class DatabaseTypes
     {

@@ -1,8 +1,6 @@
 ﻿using System;
-using Norml.Common;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers
+namespace Norml.Core.Tests.Common.Helpers
 {
     public class ExceptionAsserter : IExceptionAsserter
     {

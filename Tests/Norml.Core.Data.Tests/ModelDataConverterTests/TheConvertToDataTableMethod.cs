@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using NUnit.Framework;
-using Norml.Common.Exceptions;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.ModelDataConverterTests
+namespace Norml.Core.Data.Tests.ModelDataConverterTests
 {
     [TestFixture]
     public class TheConvertToDataTableMethod : MockTestBase<ModelDataConverter>

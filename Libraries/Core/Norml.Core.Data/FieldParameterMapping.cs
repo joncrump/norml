@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Norml.Common.Data
+namespace Norml.Core.Data
 {
     public class FieldParameterMapping
     {

@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
-using Norml.Tests.Common;
-using Norml.Tests.Common.Base;
-using Norml.Tests.Common.Extensions;
 
-namespace Norml.Common.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilderStrategyTests
+namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilderStrategyTests
 {
     [TestFixture]
     public class TheBuildItemsMethod : MockTestBase<DictionaryBasedDataReaderJoinedBuilderStrategy>

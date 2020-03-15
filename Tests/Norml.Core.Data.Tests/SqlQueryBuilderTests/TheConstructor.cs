@@ -1,8 +1,4 @@
-﻿using NUnit.Framework;
-using Norml.Common.Data.QueryBuilders;
-using Norml.Tests.Common.Base;
-
-namespace Norml.Common.Data.Tests.SqlQueryBuilderTests
+﻿namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
 {
     [TestFixture]
     public class TheConstructor : TestBase

@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using Norml.Common;
-
-namespace Norml.Providers.Repositories.Common
+﻿namespace Norml.Core.Providers.Repositories
 {
     //    public abstract class BasicPagingRepositoryProviderBase<TInterface, TRepository> 
 //        : ReadRepositoryProviderBase<TInterface, TRepository>

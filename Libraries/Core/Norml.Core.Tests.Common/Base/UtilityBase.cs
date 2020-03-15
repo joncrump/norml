@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Moq;
-using Norml.Common;
-using Norml.Tests.Common.Helpers;
+using Norml.Core.Tests.Common.Helpers;
 
-namespace Norml.Tests.Common.Base
+namespace Norml.Core.Tests.Common.Base
 {
     public abstract class UtilityBase
     {

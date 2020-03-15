@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public class PagingModel
     {

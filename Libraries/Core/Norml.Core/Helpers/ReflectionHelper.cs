@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Norml.Common.Extensions;
+using Norml.Core.Extensions;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public class ReflectionHelper : IReflectionHelper
     {

@@ -1,10 +1,6 @@
 ﻿using System;
-using Moq;
-using NUnit.Framework;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.DatabaseRepositoryBaseTests
+namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 {
     [TestFixture]
     public class TheExecuteSingleMethod : MockTestBase<TestableDatabaseRepository>

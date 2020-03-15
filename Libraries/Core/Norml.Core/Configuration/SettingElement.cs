@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-namespace Norml.Common.Configuration
+﻿namespace Norml.Core.Configuration
 {
     public class SettingElement : ConfigurationElement
     {

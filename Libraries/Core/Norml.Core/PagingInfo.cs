@@ -1,6 +1,6 @@
-﻿using Norml.Common.Extensions;
+﻿using Norml.Core.Extensions;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     public class PagingInfo
     {

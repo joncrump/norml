@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Norml.Common
+namespace Norml.Core
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class IgnoreAttribute : Attribute

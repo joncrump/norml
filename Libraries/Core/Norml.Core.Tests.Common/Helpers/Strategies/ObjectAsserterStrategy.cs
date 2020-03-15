@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using NUnit.Framework;
-using Norml.Common.Extensions;
 
-namespace Norml.Tests.Common.Helpers.Strategies
+namespace Norml.Core.Tests.Common.Helpers.Strategies
 {
     public class ObjectAsserterStrategy<TValue> : AsserterStrategyBase<TValue> where TValue : class
     {

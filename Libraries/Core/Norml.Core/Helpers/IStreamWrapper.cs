@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Norml.Common.Helpers
+namespace Norml.Core.Helpers
 {
     public interface IStreamWrapper
     {

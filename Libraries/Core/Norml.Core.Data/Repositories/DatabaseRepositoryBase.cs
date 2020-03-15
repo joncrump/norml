@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Norml.Common.Data.Repositories.Strategies;
-using Norml.Common.Extensions;
+using Norml.Core.Data.Repositories.Strategies;
 
-namespace Norml.Common.Data.Repositories
+namespace Norml.Core.Data.Repositories
 {
     public abstract class DatabaseRepositoryBase
     {

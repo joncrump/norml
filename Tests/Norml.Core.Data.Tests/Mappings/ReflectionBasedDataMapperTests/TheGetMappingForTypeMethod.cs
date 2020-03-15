@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using NUnit.Framework;
-using Norml.Common.Data.Attributes;
-using Norml.Common.Data.Helpers;
-using Norml.Common.Data.Mappings;
-using Norml.Tests.Common.Base;
 
-namespace Norml.Common.Data.Tests.Mappings.ReflectionBasedDataMapperTests
+namespace Norml.Core.Data.Tests.Mappings.ReflectionBasedDataMapperTests
 {
     [TestFixture]
     public class TheGetMappingForTypeMethod : MockTestBase<ReflectionBasedDataMapper>
