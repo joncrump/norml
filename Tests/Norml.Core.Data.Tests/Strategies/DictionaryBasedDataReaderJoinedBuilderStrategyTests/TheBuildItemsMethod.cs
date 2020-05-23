@@ -240,7 +240,7 @@ namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilde
 
             Asserter.AssertEquality(expected, actual, additionalParameters:new Dictionary<string, object>
             {
-                {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareParent}
+                {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareParent}
             });
 
             IEnumerable<Child1> firstExpectedChild1s = ((IEnumerable<Parent>)expected).First().Child1s;
@@ -249,7 +249,7 @@ namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilde
             Asserter.AssertEquality(firstExpectedChild1s, firstActualChild1s,
                 additionalParameters: new Dictionary<string, object>
                 {
-                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild1s}
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild1s}
                 });
 
             IEnumerable<Child2> firstExpectedChild2s = ((IEnumerable<Parent>)expected).First().Child2s;
@@ -258,7 +258,7 @@ namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilde
             Asserter.AssertEquality(firstExpectedChild2s, firstActualChild2s,
                 additionalParameters: new Dictionary<string, object>
                 {
-                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild2s}
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild2s}
                 });
 
             IEnumerable<Child1> lastExpectedChild1s = ((IEnumerable<Parent>)expected).Last().Child1s;
@@ -267,7 +267,7 @@ namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilde
             Asserter.AssertEquality(lastExpectedChild1s, lastActualChild1s,
                 additionalParameters: new Dictionary<string, object>
                 {
-                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild1s}
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild1s}
                 });
 
             IEnumerable<Child2> lastExpectedChild2s = ((IEnumerable<Parent>)expected).Last().Child2s;
@@ -276,7 +276,7 @@ namespace Norml.Core.Data.Tests.Strategies.DictionaryBasedDataReaderJoinedBuilde
             Asserter.AssertEquality(lastExpectedChild2s, lastActualChild2s,
                  additionalParameters: new Dictionary<string, object>
                 {
-                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild2s}
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, compareChild2s}
                 });
         }
 

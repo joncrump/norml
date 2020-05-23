@@ -1,4 +1,7 @@
-﻿namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
+﻿using Norml.Core.Data.Repositories;
+using Norml.Core.Data.Repositories.Strategies;
+
+namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 {
     public class TestableDatabaseRepository : DatabaseRepositoryBase
     {

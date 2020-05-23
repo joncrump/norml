@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Norml.Core.Data.Mappings;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {

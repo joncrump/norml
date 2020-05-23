@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
 
 namespace Norml.Core.Tests.Common.Helpers

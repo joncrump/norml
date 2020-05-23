@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Tests.Common.Helpers
 {

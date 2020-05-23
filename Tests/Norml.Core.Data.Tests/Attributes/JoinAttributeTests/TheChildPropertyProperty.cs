@@ -1,69 +1,48 @@
 ﻿using System;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
 {
     [TestFixture]
-    public class TheChildPropertyProperty : MsTestBase
+    public class TheChildPropertyProperty : TestBase
     {
         [Test]
         public void WillReturnRightKeyIfChildPropertyPassedToConstructorIsNull()
         {
-            var expected = String.Empty;
+            var expected = DataGenerator.GenerateString();
 
-            TestRunner
-                .DoCustomSetup(() =>
-                {
-                    expected = DataGenerator.GenerateString();
-                })
-                .ExecuteTest(() =>
-                {
-                    var attribute = new JoinAttribute(JoinType.Left, typeof(object),
-                        DataGenerator.GenerateString(), expected);
+            var attribute = new JoinAttribute(JoinType.Left, typeof(object),
+                DataGenerator.GenerateString(), expected);
 
-                    Assert.AreEqual(expected, attribute.RightKey);
-                    Assert.AreEqual(expected, attribute.ChildProperty);
-                });
+            Assert.AreEqual(expected, attribute.RightKey);
+            Assert.AreEqual(expected, attribute.ChildProperty);
         }
 
         [Test]
         public void WillReturnRightKeyIfChildPropertyPassedToConstructorIsEmpty()
         {
-            var expected = String.Empty;
+            var expected = DataGenerator.GenerateString();
 
-            TestRunner
-                .DoCustomSetup(() =>
-                {
-                    expected = DataGenerator.GenerateString();
-                })
-                .ExecuteTest(() =>
-                {
-                    var attribute = new JoinAttribute(JoinType.Left, typeof(object),
-                        DataGenerator.GenerateString(), expected, childProperty: String.Empty);
+            var attribute = new JoinAttribute(JoinType.Left, typeof(object),
+                DataGenerator.GenerateString(), expected, childProperty: String.Empty);
 
-                    Asserter.AssertEquality(expected, attribute.RightKey);
-                    Asserter.AssertEquality(expected, attribute.ChildProperty);
-                });
+            Asserter.AssertEquality(expected, attribute.RightKey);
+            Asserter.AssertEquality(expected, attribute.ChildProperty);
+
         }
 
         [Test]
         public void WillReturnChildPropertyIfChildPropertyPassedToConstructorHasValue()
         {
-            var expected = String.Empty;
+            var expected = DataGenerator.GenerateString();
+            var attribute = new JoinAttribute(JoinType.Left, typeof(object),
+                DataGenerator.GenerateString(), DataGenerator.GenerateString(),
+                childProperty: expected);
 
-            TestRunner
-                .DoCustomSetup(() =>
-                {
-                    expected = DataGenerator.GenerateString();
-                })
-                .ExecuteTest(() =>
-                {
-                    var attribute = new JoinAttribute(JoinType.Left, typeof(object),
-                        DataGenerator.GenerateString(), DataGenerator.GenerateString(),
-                        childProperty: expected);
-
-                    Assert.AreNotEqual(expected, attribute.RightKey);
-                    Asserter.AssertEquality(expected, attribute.ChildProperty);
-                });
+            Assert.AreNotEqual(expected, attribute.RightKey);
+            Asserter.AssertEquality(expected, attribute.ChildProperty);
         }
     }
 }

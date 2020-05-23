@@ -1,4 +1,7 @@
-﻿namespace Norml.Core.Tests.Helpers.ReflectionHelperTests
+﻿using Norml.Core.Helpers;
+using Norml.Core.Tests.Common.Base;
+
+namespace Norml.Core.Tests.Helpers.ReflectionHelperTests
 {
     public class TheIsTypeGenericEnumerableMethod : MockTestBase<ReflectionHelper>
     {

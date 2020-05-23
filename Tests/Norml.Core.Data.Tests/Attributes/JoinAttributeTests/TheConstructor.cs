@@ -97,38 +97,32 @@ namespace Norml.Core.Data.Tests.Attributes.JoinAttributeTests
             var expectedParentProperty = String.Empty;
             var expectedChildProperty = String.Empty;
 
-            TestRunner
-                .DoCustomSetup(() =>
-                {
-                    expectedJoinType = JoinType.Left;
-                    expectedType = typeof(Object);
-                    expectedLeftKey = DataGenerator.GenerateString();
-                    expectedRightKey = DataGenerator.GenerateString();
-                    expectedJoinTable = DataGenerator.GenerateString();
-                    expectedJoinTableLeftKey = DataGenerator.GenerateString();
-                    expectedJoinTableRightKey = DataGenerator.GenerateString();
-                    expectedJoinTableJoinType = JoinType.Right;
-                    expectedParentProperty = DataGenerator.GenerateString();
-                    expectedChildProperty = DataGenerator.GenerateString();
-                })
-                .ExecuteTest(() =>
-                {
-                    var join = new JoinAttribute(expectedJoinType, expectedType, expectedLeftKey,
-                        expectedRightKey, expectedJoinTable, expectedJoinTableLeftKey,
-                        expectedJoinTableRightKey, expectedJoinTableJoinType,
-                        expectedParentProperty, expectedChildProperty);
+            expectedJoinType = JoinType.Left;
+            expectedType = typeof(Object);
+            expectedLeftKey = DataGenerator.GenerateString();
+            expectedRightKey = DataGenerator.GenerateString();
+            expectedJoinTable = DataGenerator.GenerateString();
+            expectedJoinTableLeftKey = DataGenerator.GenerateString();
+            expectedJoinTableRightKey = DataGenerator.GenerateString();
+            expectedJoinTableJoinType = JoinType.Right;
+            expectedParentProperty = DataGenerator.GenerateString();
+            expectedChildProperty = DataGenerator.GenerateString();
 
-                    Asserter.AssertEquality(expectedJoinType, join.JoinType);
-                    Asserter.AssertEquality(expectedType.ToString(), join.JoinedType.ToString());
-                    Asserter.AssertEquality(expectedLeftKey, expectedLeftKey);
-                    Asserter.AssertEquality(expectedRightKey, join.RightKey);
-                    Asserter.AssertEquality(expectedJoinTable, join.JoinTable);
-                    Asserter.AssertEquality(expectedJoinTableLeftKey, join.JoinTableLeftKey);
-                    Asserter.AssertEquality(expectedJoinTableRightKey, join.JoinTableRightKey);
-                    Asserter.AssertEquality(expectedJoinTableJoinType, join.JoinTableJoinType);
-                    Asserter.AssertEquality(expectedParentProperty, join.ParentProperty);
-                    Asserter.AssertEquality(expectedChildProperty, join.ChildProperty);
-                });
+            var join = new JoinAttribute(expectedJoinType, expectedType, expectedLeftKey,
+                expectedRightKey, expectedJoinTable, expectedJoinTableLeftKey,
+                expectedJoinTableRightKey, expectedJoinTableJoinType,
+                expectedParentProperty, expectedChildProperty);
+
+            Asserter.AssertEquality(expectedJoinType, join.JoinType);
+            Asserter.AssertEquality(expectedType.ToString(), join.JoinedType.ToString());
+            Asserter.AssertEquality(expectedLeftKey, expectedLeftKey);
+            Asserter.AssertEquality(expectedRightKey, join.RightKey);
+            Asserter.AssertEquality(expectedJoinTable, join.JoinTable);
+            Asserter.AssertEquality(expectedJoinTableLeftKey, join.JoinTableLeftKey);
+            Asserter.AssertEquality(expectedJoinTableRightKey, join.JoinTableRightKey);
+            Asserter.AssertEquality(expectedJoinTableJoinType, join.JoinTableJoinType);
+            Asserter.AssertEquality(expectedParentProperty, join.ParentProperty);
+            Asserter.AssertEquality(expectedChildProperty, join.ChildProperty);
         }
     }
 }

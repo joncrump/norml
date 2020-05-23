@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Norml.Core.Data.Repositories.Strategies;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data.Repositories
 {

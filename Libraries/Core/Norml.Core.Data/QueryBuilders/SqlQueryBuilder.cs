@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq.Expressions;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data.QueryBuilders
 {

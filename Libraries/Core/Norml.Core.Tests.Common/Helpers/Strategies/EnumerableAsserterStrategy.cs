@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Tests.Common.Helpers.Strategies
 {

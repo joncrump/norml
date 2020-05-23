@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Tests.Common.Helpers.Strategies
 {

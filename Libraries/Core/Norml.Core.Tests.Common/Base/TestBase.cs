@@ -70,7 +70,7 @@ namespace Norml.Core.Tests.Common.Base
                     throw;
                 }
 
-                if (expectedMessage.IsNullOrEmpty())
+                if (String.IsNullOrEmpty(expectedMessage))
                 {
                     return;
                 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Norml.Core.Data.Mappings;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data
 {

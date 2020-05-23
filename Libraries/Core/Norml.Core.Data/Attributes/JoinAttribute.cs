@@ -39,7 +39,7 @@ namespace Norml.Core.Data.Attributes
         {
             get
             {
-                if (_parentProperty.IsNullOrEmpty())
+                if (String.IsNullOrEmpty(_parentProperty))
                 {
                     return LeftKey;
                 }
@@ -56,7 +56,7 @@ namespace Norml.Core.Data.Attributes
         {
             get
             {
-                if (_childProperty.IsNullOrEmpty())
+                if (string.IsNullOrEmpty(_childProperty))
                 {
                     return RightKey;
                 }

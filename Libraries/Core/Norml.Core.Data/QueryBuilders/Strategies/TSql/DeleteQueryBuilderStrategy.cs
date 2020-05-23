@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Text;
+using Norml.Core.Extensions;
 
 namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 {

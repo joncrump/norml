@@ -1,4 +1,6 @@
-﻿namespace Norml.Core.Data
+﻿using Norml.Core.Extensions;
+
+namespace Norml.Core.Data
 {
     public abstract class ValueFactoryBuilderBase
     {
