@@ -86,3 +86,7 @@ Debug/*
 *.dll
 /.scannerwork/*.sonar_lock
 /.scannerwork
+/*.DotSettings
+/TightlyCurly.Com.vssscc
+/TightlyCurly.Com.sln.DotSettings.user
+/TightlyCurly.Com.userprefs
