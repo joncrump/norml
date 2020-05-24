@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.Helpers;
+using Norml.Core.Data.Mappings;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.Mappings.ReflectionBasedDataMapperTests
 {

@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Moq;
+using Norml.Core.Data.QueryBuilders;
+using Norml.Core.Helpers;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.WriteDatabaseRepositoryBaseTests
 {

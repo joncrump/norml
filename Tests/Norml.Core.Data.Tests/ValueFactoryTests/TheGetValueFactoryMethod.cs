@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Norml.Core.Exceptions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.ValueFactoryTests
 {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using Norml.Core.Data.Attributes;
 
 namespace Norml.Core.Data.Tests
 {

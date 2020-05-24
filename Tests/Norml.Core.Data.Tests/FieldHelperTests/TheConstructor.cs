@@ -1,4 +1,7 @@
-﻿namespace Norml.Core.Data.Tests.FieldHelperTests
+﻿using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
+
+namespace Norml.Core.Data.Tests.FieldHelperTests
 {
     [TestFixture]
     public class TheConstructor : TestBase

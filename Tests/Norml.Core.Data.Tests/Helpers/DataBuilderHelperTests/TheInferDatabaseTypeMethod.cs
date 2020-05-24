@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Data;
+using Norml.Core.Data.Helpers;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.Helpers.DataBuilderHelperTests
 {

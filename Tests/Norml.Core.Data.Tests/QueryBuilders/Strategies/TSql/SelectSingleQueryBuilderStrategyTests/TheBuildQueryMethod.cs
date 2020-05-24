@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
+using Moq;
+using Norml.Core.Data.QueryBuilders.Strategies.TSql;
+using Norml.Core.Extensions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryBuilderStrategyTests
 {
@@ -102,7 +108,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryB
                 additionalParameters: new Dictionary<string, object>
                 {
                     {
-                        Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, 
+                        Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, 
                         expression
                     }
                 });

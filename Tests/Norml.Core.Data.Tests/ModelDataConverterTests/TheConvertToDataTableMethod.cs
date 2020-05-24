@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using Norml.Core.Exceptions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.ModelDataConverterTests
 {
@@ -72,7 +75,7 @@ namespace Norml.Core.Data.Tests.ModelDataConverterTests
             Asserter.AssertEquality(expected.ColumnMappings, actual.ColumnMappings, additionalParameters:
                 new Dictionary<string, object>
                 {
-                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
                 });
         }
 

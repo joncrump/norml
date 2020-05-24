@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Norml.Core.Extensions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.FieldHelperTests
 {

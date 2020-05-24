@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Core\Norml.Core.Data\Norml.Core.Data.csproj" />
+    <ProjectReference Include="..\..\Libraries\Core\Norml.Core.Tests.Common.Data\Norml.Core.Tests.Common.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\Core\Norml.Core.Tests.Common\Norml.Core.Tests.Common.csproj" />
     <ProjectReference Include="..\..\Libraries\Core\Norml.Core\Norml.Core.csproj" />
   </ItemGroup>

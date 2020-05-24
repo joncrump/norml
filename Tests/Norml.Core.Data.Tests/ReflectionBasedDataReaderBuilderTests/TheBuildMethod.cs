@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Linq.Expressions;
+using Moq;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Extensions;
+using Norml.Core.Tests.Common;
+using Norml.Core.Tests.Common.Base;
+using Norml.Core.Tests.Common.Data;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.ReflectionBasedDataReaderBuilderTests
 {

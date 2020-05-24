@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
+using Moq;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.QueryBuilders;
+using Norml.Core.Data.QueryBuilders.Strategies;
+using Norml.Core.Data.QueryBuilders.Strategies.TSql;
+using Norml.Core.Extensions;
+using Norml.Core.Tests.Common.Base;
+using NUnit.Framework;
 
 namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryBuilderStrategyTests
 {
