@@ -1,3 +1,3 @@
 # Norml
 
-Not another Object Relation Mapper Library
+Not another Object Relational Mapper Library
