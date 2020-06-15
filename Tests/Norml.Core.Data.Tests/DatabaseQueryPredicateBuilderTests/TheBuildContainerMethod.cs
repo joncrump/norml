@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using Moq;
+using Norml.Core.Data.Attributes;
 using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
@@ -463,7 +464,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                 .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
                 .Returns(mapper.Object);
 
-            expected = "SomeName = @someName AND DAY(SomeDate) = {0} AND MONTH(SomeDate) = {1} AND YEAR(SomeDate) = {2}"
+            expected = "Name = @name AND DAY(SomeDate) = {0} AND MONTH(SomeDate) = {1} AND YEAR(SomeDate) = {2}"
                 .FormatString(dateValue.Day.ToString(), dateValue.Month.ToString(), dateValue.Year.ToString());
 
             var actual = SystemUnderTest.BuildContainer(expression, typeof(DateClass));
@@ -474,7 +475,7 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
 
             Asserter.AssertEquality(new List<SqlParameter>
             {
-                new SqlParameter("@someName", SqlDbType.NVarChar)
+                new SqlParameter("@name", SqlDbType.NVarChar)
                 {
                     Value = dateClass.Name
                 }
@@ -503,7 +504,9 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
 
         private class DateClass
         {
+            [FieldMetadata("Name", SqlDbType.NVarChar, "@name")]
             public string Name { get; set; }
+            [FieldMetadata("SomeDateTime", SqlDbType.DateTime, "@someDateTime")]
             public DateTime SomeDateTime { get; set; }
         }
 
@@ -588,7 +591,8 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
                         DatabaseType = SqlDbType.NVarChar,
                         Field = "Name",
                         AllowDbNull = true,
-                        PropertyName = "Name"
+                        PropertyName = "Name",
+                        ParameterName = "@name"
                     }
                 }
             };

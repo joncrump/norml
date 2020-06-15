@@ -62,8 +62,7 @@ namespace Norml.Core.Data
             }
             catch (ArgumentException exception)
             {
-                if (!exception.Message.StartsWith(
-                        "Expression of type"))
+                if (!exception.Message.StartsWith("Expression of type"))
                 {
                     throw;
                 }
