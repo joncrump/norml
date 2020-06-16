@@ -53,7 +53,7 @@ namespace Norml.Core.Tests.Common
             {
                 var parameter1 = parameter;
 
-                if (parametersToSkip
+                if (parametersToSkip == null || parametersToSkip
                     .Where(p => p.ToLower() == parameter1.Name.ToLower())
                     .IsNullOrEmpty())
                 {
@@ -172,7 +172,7 @@ namespace Norml.Core.Tests.Common
             {
                 var constructor = constructors.First();
                 var parameters = constructor.GetParameters();
-                var values = InitializeParameters(parameters);
+                var values = InitializeParameters(parameters).ToArray();
 
                 instance = (TItemUnderTest)Activator.CreateInstance(typeof(TItemUnderTest), values);
             }
