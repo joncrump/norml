@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq.Expressions;
 using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
@@ -33,64 +35,57 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         [Test]
         public void WillReturnFieldsWithoutInstance()
         {
-            TableObjectMapping expected = null;
+            var expected = new TableObjectMapping
+            {
+                TableName = "dbo.TestTable",
+                FieldMappings = new Dictionary<string, FieldParameterMapping>
+                {
+                    {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, null, true)},
+                    {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar)},
+                    {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar)}
+                }
+            };
 
-//            expected = new TableObjectMapping
-//            {
-//                TableName = "dbo.TestTable", 
-//                FieldMappings = new Dictionary<string, FieldParameterMapping>
-//                    {
-//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, null, true)},
-//                        {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar)},
-//                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar)}
-//                    }
-//            };
-    
-            throw new NotImplementedException();
-//            var actual = SystemUnderTest.BuildFields<TestFixture>();
-//            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression = 
-//                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNull(f, null));
-//
-//            Asserter.AssertEquality(expected, actual, new[] {"FieldMappings","Joins", "JoinType"});
-//
-//            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
-//                new Dictionary<string, object>
-//                {
-//                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
-//                });
+            var actual = SystemUnderTest.BuildFields<TestClass>();
+            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression =
+                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNull(f, null));
+
+            Asserter.AssertEquality(expected, actual, new[] { "FieldMappings", "Joins", "JoinType" });
+
+            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
+                new Dictionary<string, object>
+                {
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
+                });
         }
 
         [Test]
         public void WillReturnFieldsWithInstance()
         {
-            TableObjectMapping expected = null;
-            TestClass model = null;
+            var model = ObjectCreator.CreateNew<TestClass>();
 
-            throw new NotImplementedException();
-//            model = ObjectCreator.CreateNew<TestFixture>();
-//
-//            expected = new TableObjectMapping
-//            {
-//                TableName = "dbo.TestTable", 
-//                FieldMappings = new Dictionary<string, FieldParameterMapping>
-//                    {
-//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
-//                        {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar, model.Foo)},
-//                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
-//                    }
-//            };
-//
-//            var actual = SystemUnderTest.BuildFields(model:model);
-//
-//            Asserter.AssertEquality(expected, actual, new[] {"FieldMappings", "Joins", "JoinType"});
-//            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression =
-//                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNotNull(f, null));
-//
-//            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
-//                new Dictionary<string, object>
-//                {
-//                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
-//                });
+            var expected = new TableObjectMapping
+            {
+                TableName = "dbo.TestTable",
+                FieldMappings = new Dictionary<string, FieldParameterMapping>
+                {
+                    {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
+                    {"Foo", new FieldParameterMapping("SomeFoo", "@fooParameter", SqlDbType.NVarChar, model.Foo)},
+                    {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
+                }
+            };
+
+            var actual = SystemUnderTest.BuildFields(model: model);
+
+            Asserter.AssertEquality(expected, actual, new[] { "FieldMappings", "Joins", "JoinType" });
+            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression =
+                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNotNull(f, null));
+
+            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
+                new Dictionary<string, object>
+                {
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
+                });
         }
 
         [Test]
@@ -99,30 +94,29 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
             TableObjectMapping expected = null;
             TestClass model = null;
 
-            throw new NotImplementedException();
-//            model = ObjectCreator.CreateNew<TestFixture>();
-//
-//            expected = new TableObjectMapping
-//            {
-//                TableName = "dbo.TestTable", 
-//                FieldMappings = new Dictionary<string, FieldParameterMapping>
-//                    {
-//                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
-//                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
-//                    }
-//            };
-//
-//            var actual = SystemUnderTest.BuildFields(new[] {"Id", "Bar"}, model: model);
-//            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression =
-//                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNotNull(f, null));
-//
-//            Asserter.AssertEquality(expected, actual, new[] {"FieldMappings", "Joins", "JoinType"});
-//
-//            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
-//                new Dictionary<string, object>
-//                {
-//                    {Norml.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
-//                });
+            model = ObjectCreator.CreateNew<TestClass>();
+
+            expected = new TableObjectMapping
+            {
+                TableName = "dbo.TestTable",
+                FieldMappings = new Dictionary<string, FieldParameterMapping>
+                    {
+                        {"Id", new FieldParameterMapping("TestFixtureId", "@id", SqlDbType.Int, model.Id, true)},
+                        {"Bar", new FieldParameterMapping("PioneerSquareBar", "@itsFridayLetsGoToTheBar", SqlDbType.NVarChar, model.Bar)}
+                    }
+            };
+
+            var actual = SystemUnderTest.BuildFields(new[] { "Id", "Bar" }, model: model);
+            Expression<Action<KeyValuePair<string, FieldParameterMapping>, KeyValuePair<string, FieldParameterMapping>>> expression =
+                (e, a) => CompareFieldParameterInfos(e, a, f => Assert.IsNotNull(f, null));
+
+            Asserter.AssertEquality(expected, actual, new[] { "FieldMappings", "Joins", "JoinType" });
+
+            Asserter.AssertEquality(expected.FieldMappings, actual.FieldMappings, additionalParameters:
+                new Dictionary<string, object>
+                {
+                    {Core.Tests.Common.Constants.ParameterNames.ComparisonDelegate, expression}
+                });
         }
 
         [Test]

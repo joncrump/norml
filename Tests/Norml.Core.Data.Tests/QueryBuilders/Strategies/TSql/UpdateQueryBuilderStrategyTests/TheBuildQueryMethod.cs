@@ -41,7 +41,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.UpdateQueryBuilder
 
             Mocks.Get<IFieldHelper>()
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), TestFixture, It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.TestTable",

@@ -14,42 +14,42 @@ namespace Norml.Core.Data
 
         public FieldHelper(IObjectMapperFactory objectMappingFactory)
         {
-            _objectMappingFactory = Guard.ThrowIfNull("objectMappingFactory", objectMappingFactory);
+            _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
         }
 
         public TableObjectMapping BuildFields<TValue>(IEnumerable<string> desiredFields = null, 
             string tableName = null, TValue model = default(TValue), bool ignoreIdentity = false, 
-            string alias = null, string instancePropertyName = null) 
+            string alias = null, string instancePropertyName = null, MappingKind mappingKind = MappingKind.Attribute) 
             where TValue : class
         {
-            throw new NotImplementedException();
-            //var mapping = _objectMappingFactory.GetMappingFor<TValue>();
+            var mapping = _objectMappingFactory.GetMapper(mappingKind);
+            var typeMapping = mapping.GetMappingFor<TValue>();
 
-            //if (tableName.IsNullOrEmpty())
-            //{
-            //    tableName = mapping.DataSource;
-            //}
+            if (tableName.IsNullOrEmpty())
+            {
+                tableName = typeMapping.DataSource;
+            }
 
-            //var fields = mapping.PropertyMappings
-            //    .Where(p => !ignoreIdentity || !p.IsIdentity)
-            //    .Where(p => (!desiredFields.IsNotNullOrEmpty() || desiredFields.Contains(p.PropertyName)))
-            //    .ToDictionary(p => p.PropertyName, p => new FieldParameterMapping(p.Field, p.ParameterName, DatabaseTypes.FieldMappings[p.FieldType.ToLower()], 
-            //        EqualityComparer<TValue>.Default.Equals(model, default(TValue)) 
-            //            ? null 
-            //            : p.MethodCache.GetPropertyValue(p.PropertyName, model), p.IsIdentity, alias));
+            var fields = typeMapping.PropertyMappings
+                .Where(p => !ignoreIdentity || !p.IsIdentity)
+                .Where(p => !desiredFields.IsNotNullOrEmpty() || desiredFields.Contains(p.PropertyName))
+                .ToDictionary(p => p.PropertyName, p => new FieldParameterMapping(p.Field, p.ParameterName, p.DatabaseType,
+                    EqualityComparer<TValue>.Default.Equals(model, default)
+                        ? null
+                        : p.MethodCache.GetPropertyValue(p.PropertyName, model), p.IsIdentity, alias));
 
-            //if (fields.IsNullOrEmpty())
-            //{
-            //    throw new InvalidOperationException("Cannot build query.  Model has no data attributes.");
-            //}
+            if (fields.IsNullOrEmpty())
+            {
+                throw new InvalidOperationException("Cannot build query.  Model has no data attributes.");
+            }
 
-            //return new TableObjectMapping
-            //{
-            //    TableName = tableName,
-            //    FieldMappings = fields,
-            //    Alias = alias,
-            //    InstancePropertyName = instancePropertyName
-            //};
+            return new TableObjectMapping
+            {
+                TableName = tableName,
+                FieldMappings = fields,
+                Alias = alias,
+                InstancePropertyName = instancePropertyName
+            };
         }
 
         public IEnumerable<IDbDataParameter> ExtractParameters(TableObjectMapping tableFieldInfo, bool ignoreIdentity)

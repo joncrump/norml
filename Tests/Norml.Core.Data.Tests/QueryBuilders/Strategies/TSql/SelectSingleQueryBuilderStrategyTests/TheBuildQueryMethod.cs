@@ -26,7 +26,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryB
 
             Mocks.Get<IFieldHelper>()
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), It.IsAny<TestClass>(),
-                    It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName  = "dbo.TestTable",
@@ -76,7 +76,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectSingleQueryB
 
             Mocks.Get<IFieldHelper>()
                .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(),
-                   It.IsAny<TestClass>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()))
+                   It.IsAny<TestClass>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                .Returns(new TableObjectMapping
                {
                     TableName  = "dbo.TestTable",

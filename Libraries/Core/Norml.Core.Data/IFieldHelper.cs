@@ -8,7 +8,7 @@ namespace Norml.Core.Data
         //IDictionary<string, IDictionary<string, FieldParameterInfo>> 
             TableObjectMapping BuildFields<TValue>(
             IEnumerable<string> desiredFields = null, string tableName = null, TValue model = default(TValue), 
-            bool ignoreIdentity = false, string alias = null, string instancePropertyName = null) where TValue : class;
+            bool ignoreIdentity = false, string alias = null, string instancePropertyName = null, MappingKind mappingKind = MappingKind.Attribute) where TValue : class;
 
         IEnumerable<IDbDataParameter> 
             ExtractParameters(TableObjectMapping tableFields,

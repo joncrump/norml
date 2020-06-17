@@ -90,7 +90,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass>(), It.IsAny<bool>(),
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Parent",
@@ -104,7 +104,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child1>(), It.IsAny<bool>(),
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child1",
@@ -118,7 +118,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child2>(), It.IsAny<bool>(),
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child2",
@@ -154,7 +154,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), 
                     It.IsAny<string>(), It.IsAny<ParentClass>(), It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Parent",
@@ -168,7 +168,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child1>(), It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child1",
@@ -182,7 +182,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child2>(), It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child2",
@@ -205,17 +205,18 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
 
             fieldHelper
                 .Verify(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(), 
-                    It.IsAny<ParentClass>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+                    It.IsAny<ParentClass>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>(), 
+                    It.IsAny<MappingKind>()), Times.Once);
 
             fieldHelper
                 .Verify(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(),
                     It.IsAny<Child1>(), It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()), Times.Once);
 
             fieldHelper
                 .Verify(x => x.BuildFields(It.IsAny<IEnumerable<string>>(), It.IsAny<string>(),
                     It.IsAny<Child2>(), It.IsAny<bool>(), It.IsAny<string>(), 
-                    It.IsAny<string>()), Times.Once); 
+                    It.IsAny<string>(), It.IsAny<MappingKind>()), Times.Once); 
         }
 
         [Test]
@@ -230,7 +231,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass>(), It.IsAny<bool>(), "t1", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Parent",
@@ -251,7 +252,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child1>(), It.IsAny<bool>(), "t2", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child1",
@@ -288,7 +289,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child2>(), It.IsAny<bool>(), "t3", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child2",
@@ -349,7 +350,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass3>(), It.IsAny<bool>(), "t1", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.ParentClass3",
@@ -370,7 +371,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child3>(), It.IsAny<bool>(), "t2", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child3",
@@ -431,7 +432,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass2>(), It.IsAny<bool>(), "t1", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Parent2",
@@ -452,7 +453,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child1>(), It.IsAny<bool>(), "t2", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child1",
@@ -489,7 +490,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child2>(), It.IsAny<bool>(), "t3", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child2",
@@ -526,7 +527,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child3>(), It.IsAny<bool>(), "t4", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child3",
@@ -584,7 +585,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
                 fieldHelper
                     .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                         It.IsAny<string>(), It.IsAny<ParentClass3>(), It.IsAny<bool>(), "t1", 
-                        It.IsAny<string>()))
+                        It.IsAny<string>(), It.IsAny<MappingKind>()))
                     .Returns(new TableObjectMapping
                     {
                         TableName = "dbo.ParentClass3",
@@ -605,7 +606,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
                 fieldHelper
                     .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                         It.IsAny<string>(), It.IsAny<Child3>(), It.IsAny<bool>(), "t2", 
-                        It.IsAny<string>()))
+                        It.IsAny<string>(), It.IsAny<MappingKind>()))
                     .Returns(new TableObjectMapping
                     {
                         TableName = "dbo.Child3",
@@ -670,7 +671,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass2>(), It.IsAny<bool>(), "t1", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Parent2",
@@ -691,7 +692,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child1>(), It.IsAny<bool>(), "t2", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child1",
@@ -728,7 +729,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child2>(), It.IsAny<bool>(), "t3", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child2",
@@ -765,7 +766,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child3>(), It.IsAny<bool>(), "t4", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child3",
@@ -828,7 +829,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ParentClass3>(), It.IsAny<bool>(), "t1", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.ParentClass3",
@@ -849,7 +850,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.SelectJoinedQueryB
             fieldHelper
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<Child3>(), It.IsAny<bool>(), "t2", 
-                    It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Child3",

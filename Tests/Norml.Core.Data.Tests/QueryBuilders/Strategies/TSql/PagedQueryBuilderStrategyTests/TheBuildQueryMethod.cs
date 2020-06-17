@@ -25,7 +25,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderS
             Mocks.Get<IFieldHelper>()
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
                     It.IsAny<string>(), It.IsAny<ClientDataModel>(), It.IsAny<bool>(), 
-                    It.IsAny<string>(), It.IsAny<string>()))
+                    It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Clients",
