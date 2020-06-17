@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Moq;
+using Norml.Core.Data.Repositories.Strategies;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
 
@@ -12,6 +13,30 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
     [TestFixture]
     public class TheExecuteNonQueryMethod : MockTestBase<TestableDatabaseRepository>
     {
+        private Mock<IDatabaseWrapper> _databaseWrapper;
+
+        protected override void Setup()
+        {
+            base.Setup();
+
+            var strategy = new Mock<IBuilderStrategy>();
+            _databaseWrapper = new Mock<IDatabaseWrapper>();
+
+            _databaseWrapper.Setup(x => x.CreateCommandText(It.IsAny<string>(), It.IsAny<QueryType>()))
+                .Returns(_databaseWrapper.Object);
+
+            _databaseWrapper.Setup(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()))
+                .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IDatabaseFactory>()
+                .Setup(x => x.GetDatabase(It.IsAny<string>()))
+                .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IBuilderStrategyFactory>()
+                .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
+                .Returns(strategy.Object);
+        }
+
         [Test]
         public void WillThrowArgumentNullExceptionIfQueryInfoIsNull()
         {
@@ -26,10 +51,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteNonQuery(Mock.Of<QueryInfo>());
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text), 
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text),
+                    Times.Once);
         }
 
         [Test]
@@ -41,11 +65,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 
             SystemUnderTest.ExecuteNonQuery(queryInfo);
 
-            throw new NotImplementedException();
-            
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                    Times.Never);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtMostOnce);
         }
 
         [Test]
@@ -60,10 +82,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 
             SystemUnderTest.ExecuteNonQuery(queryInfo);
 
-            throw new NotImplementedException();
-//                MockDatabase
-//                    .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                        Times.Never);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtMostOnce);
         }
 
         [Test]
@@ -81,9 +102,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 
             SystemUnderTest.ExecuteNonQuery(queryInfo);
 
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -91,10 +112,8 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteNonQuery(Mock.Of<QueryInfo>());
 
-            throw new NotImplementedException();
-            
-//            MockDatabase
-//                .Verify(x => x.ExecuteNonQuery(), Times.Once);
+            _databaseWrapper
+                .Verify(x => x.ExecuteNonQuery(), Times.AtLeastOnce);
         }
     }
 }

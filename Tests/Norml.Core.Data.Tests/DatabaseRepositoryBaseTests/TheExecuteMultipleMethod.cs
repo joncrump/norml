@@ -25,19 +25,14 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
 
             _databaseWrapper.Setup(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()))
                 .Returns(_databaseWrapper.Object);
-            /*
-             *  .WithParameters(queryInfo.Parameters)
-                .ExecuteMultiple<TValue>(strategy, queryInfo.TableObjectMappings);
-             */
-
-
-            Mocks.Get<IBuilderStrategyFactory>()
-                .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
-                .Returns(strategy.Object);
 
             Mocks.Get<IDatabaseFactory>()
                 .Setup(x => x.GetDatabase(It.IsAny<string>()))
                 .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IBuilderStrategyFactory>()
+                .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
+                .Returns(strategy.Object);
         }
 
         [Test]
