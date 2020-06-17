@@ -33,20 +33,22 @@ namespace Norml.Core.Data
             var fields = typeMapping.PropertyMappings
                 .Where(p => !ignoreIdentity || !p.IsIdentity)
                 .Where(p => !desiredFields.IsNotNullOrEmpty() || desiredFields.Contains(p.PropertyName))
-                .ToDictionary(p => p.PropertyName, p => new FieldParameterMapping(p.Field, p.ParameterName, p.DatabaseType,
-                    EqualityComparer<TValue>.Default.Equals(model, default)
-                        ? null
-                        : p.MethodCache.GetPropertyValue(p.PropertyName, model), p.IsIdentity, alias));
+                .ToList();
+            
+            var fieldsDictionary = fields.ToDictionary(p => p.PropertyName, p => new FieldParameterMapping(p.Field, p.ParameterName, p.DatabaseType,
+                EqualityComparer<TValue>.Default.Equals(model, default)
+                    ? null
+                    : p.GetPropertyValue(model), p.IsIdentity, alias));
 
-            if (fields.IsNullOrEmpty())
+            if (fieldsDictionary.IsNullOrEmpty())
             {
-                throw new InvalidOperationException("Cannot build query.  Model has no data attributes.");
+                throw new InvalidOperationException("Cannot build query.  Model has no mappings.");
             }
 
             return new TableObjectMapping
             {
                 TableName = tableName,
-                FieldMappings = fields,
+                FieldMappings = fieldsDictionary,
                 Alias = alias,
                 InstancePropertyName = instancePropertyName
             };

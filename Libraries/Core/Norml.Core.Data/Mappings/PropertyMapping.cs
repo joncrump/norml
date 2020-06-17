@@ -9,7 +9,6 @@ namespace Norml.Core.Data.Mappings
     {
         public PropertyMapping()
         {
-
         }
 
         [JsonConstructor()]
@@ -35,6 +34,10 @@ namespace Norml.Core.Data.Mappings
         public bool IsPrimitive { get; set; }
         public string LazyLoader { get; set; }
         public Type MappedType { get; set; }
-        public IMethodCache MethodCache { get; set; }
+
+        public object GetPropertyValue(object instance)
+        {
+            return instance.GetType().GetProperty(PropertyName)?.GetValue(instance);
+        }
     }
 }

@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using Moq;
+using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Norml.Core.Data.Tests.FieldHelperTests
 {
@@ -63,6 +67,15 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         public void WillReturnFieldsWithInstance()
         {
             var model = ObjectCreator.CreateNew<TestClass>();
+            var mockDataMapper = new Mock<IDataMapper>();
+
+            Mocks.Get<IObjectMapperFactory>()
+                .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
+                .Returns(mockDataMapper.Object);
+
+            mockDataMapper
+                .Setup(x => x.GetMappingFor<TestClass>())
+                .Returns(GetMappingForTestClass(model));
 
             var expected = new TableObjectMapping
             {
@@ -151,6 +164,40 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
             Asserter.AssertEquality(expected.Value.DbType, actual.Value.DbType);
 
             valueAsserter(actual.Value.Value);
+        }
+
+        private TypeMapping GetMappingForTestClass(TestClass model)
+        {
+            return new TypeMapping
+            {
+                Type = typeof(TestClass),
+                DataSource = "dbo.TestTable",
+                PropertyMappings = new List<PropertyMapping>
+                {
+                    new PropertyMapping
+                    {
+                        Field = "TestFixtureId",
+                        DatabaseType = SqlDbType.Int,
+                        AllowDbNull = true,
+                        ParameterName = "@id",
+                        PropertyName = "Id"
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "SomeFoo",
+                        DatabaseType = SqlDbType.NVarChar,
+                        ParameterName = "@fooParameter",
+                        PropertyName = "Foo"
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "Bar",
+                        DatabaseType = SqlDbType.NVarChar,
+                        ParameterName =  "@itsFridayLetsGoToTheBar",
+                        PropertyName = "Bar"
+                    }
+                }
+            };
         }
     }
 }
