@@ -26,7 +26,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokeBuilderStrategyIfBuildModeIsSingle()
         {
-            SystemUnderTest.BuildSelectQuery(It.IsAny<Expression<Func<TestFixture, bool>>>(),
+            SystemUnderTest.BuildSelectQuery(It.IsAny<Expression<Func<TestClass, bool>>>(),
                 It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IEnumerable<string>>(),
 // ReSharper disable once RedundantArgumentDefaultValue
                 It.IsAny<string>(), BuildMode.Single);
@@ -39,7 +39,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokeBuilderStrategyIfBuildModeIsJoined()
         {
-            SystemUnderTest.BuildSelectQuery(It.IsAny<Expression<Func<TestFixture, bool>>>(),
+            SystemUnderTest.BuildSelectQuery(It.IsAny<Expression<Func<TestClass, bool>>>(),
                 It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IEnumerable<string>>(),
                 It.IsAny<string>(), BuildMode.Joined);
 

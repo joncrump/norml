@@ -20,17 +20,17 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.InsertQueryBuilder
         {
             Asserter
                 .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildQuery<TestFixture>());
+                    () => SystemUnderTest.BuildQuery<TestClass>());
         }
 
         [Test]
         public void WillBuildInsertQuery()
         {
             QueryInfo expected = null;
-            TestFixture TestFixture = null;
+            TestClass TestFixture = null;
             IEnumerable<IDbDataParameter> expectedParameters = null;
 
-            TestFixture = ObjectCreator.CreateNew<TestFixture>();
+            TestFixture = ObjectCreator.CreateNew<TestClass>();
             var expectedQuery = "INSERT dbo.TestTable ([TestFixtureId], [SomeFoo], [PioneerSquareBar]) VALUES (@id, @fooParameter, @itsFridayLetsGoToTheBar); SELECT SCOPE_IDENTITY() AS Id;";
             expectedParameters = new List<IDbDataParameter>
             {
@@ -68,7 +68,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.InsertQueryBuilder
             parameters.TableName = null;
             parameters.Model = TestFixture;
 
-            QueryInfo actual = SystemUnderTest.BuildQuery<TestFixture>(parameters);
+            QueryInfo actual = SystemUnderTest.BuildQuery<TestClass>(parameters);
             var expression = ConstructComparisonDelegate();
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "tableObjectMappings" });

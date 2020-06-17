@@ -20,15 +20,15 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.UpdateQueryBuilder
         public void WillBuildUpdateQueryWithPredicate()
         {
             QueryInfo expected = null;
-            TestFixture TestFixture = null;
+            TestClass TestFixture = null;
             IEnumerable<IDbDataParameter> expectedParameters = null;
 
-            TestFixture = ObjectCreator.CreateNew<TestFixture>();
+            TestFixture = ObjectCreator.CreateNew<TestClass>();
             var whereClause = DataGenerator.GenerateString();
             var expectedQuery = "UPDATE dbo.TestTable SET [TestFixtureId] = @id, [SomeFoo] = @fooParameter, [PioneerSquareBar] = @itsFridayLetsGoToTheBar WHERE {0};"
                 .FormatString(whereClause);
             Mocks.Get<IPredicateBuilder>()
-                .Setup(x => x.BuildContainer(It.IsAny<Expression<Func<TestFixture, bool>>>(), It.IsAny<Type>(), true, It.IsAny<string>(), 
+                .Setup(x => x.BuildContainer(It.IsAny<Expression<Func<TestClass, bool>>>(), It.IsAny<Type>(), true, It.IsAny<string>(), 
                     It.IsAny<string>()))
                 .Returns(new QueryContainer(whereClause, expectedParameters));
             expectedParameters = new List<IDbDataParameter>
@@ -58,7 +58,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.UpdateQueryBuilder
                 .Setup(x => x.ExtractParameters(It.IsAny<TableObjectMapping>(), It.IsAny<bool>()))
                 .Returns(expectedParameters);
 
-            Expression<Func<TestFixture, bool>> predicate = t => t.Bar == "Joe's Bar";
+            Expression<Func<TestClass, bool>> predicate = t => t.Bar == "Joe's Bar";
             dynamic parameters = new ExpandoObject();
             
             parameters.Predicate = predicate;
@@ -68,7 +68,7 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.UpdateQueryBuilder
             parameters.TableName = null;
             parameters.DesiredFields = null;
 
-            QueryInfo actual = SystemUnderTest.BuildQuery<TestFixture>(parameters);
+            QueryInfo actual = SystemUnderTest.BuildQuery<TestClass>(parameters);
             Expression<Action<SqlParameter, SqlParameter>> expression = (e, a) => CompareParameters(e, a);
 
             Asserter.AssertEquality(expected, actual, new[] { "Parameters", "tableObjectMappings" });

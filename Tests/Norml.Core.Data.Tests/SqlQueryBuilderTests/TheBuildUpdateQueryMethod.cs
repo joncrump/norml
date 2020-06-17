@@ -26,7 +26,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         {
             Asserter.AssertException<ArgumentNullException>(
                 () => SystemUnderTest.BuildUpdateQuery(null,
-                    It.IsAny<Expression<Func<TestFixture, bool>>>(),
+                    It.IsAny<Expression<Func<TestClass, bool>>>(),
                     It.IsAny<IEnumerable<string>>(), It.IsAny<string>()))
             .AndVerifyMessageContains("model");
         }
@@ -35,7 +35,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         public void WillThrowArgumentNullExceptionIfPredicateIsNull()
         {
             Asserter.AssertException<ArgumentNullException>(
-                () => SystemUnderTest.BuildUpdateQuery(Mock.Of<TestFixture>(),
+                () => SystemUnderTest.BuildUpdateQuery(Mock.Of<TestClass>(),
                     null,
                     It.IsAny<IEnumerable<string>>(), It.IsAny<string>()))
             .AndVerifyMessageContains("predicate");
@@ -44,9 +44,9 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokeQueryBuilderStrategyFactory()
         {
-            Expression<Func<TestFixture, bool>> predicate = t => t.Id == 5;
+            Expression<Func<TestClass, bool>> predicate = t => t.Id == 5;
 
-            SystemUnderTest.BuildUpdateQuery(Mock.Of<TestFixture>(), predicate,
+            SystemUnderTest.BuildUpdateQuery(Mock.Of<TestClass>(), predicate,
                 It.IsAny<IEnumerable<string>>(), It.IsAny<string>());
 
             Mocks.Get<IQueryBuilderStrategyFactory>()

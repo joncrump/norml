@@ -15,7 +15,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Setup(x => x.GetBuilderStrategy(QueryKind.Count))
                 .Returns(new Mock<IQueryBuilderStrategy>().Object);
-            SystemUnderTest.BuildCountQuery<TestFixture>();
+            SystemUnderTest.BuildCountQuery<TestClass>();
 
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Verify(x => x.GetBuilderStrategy(QueryKind.Count), Times.Once);

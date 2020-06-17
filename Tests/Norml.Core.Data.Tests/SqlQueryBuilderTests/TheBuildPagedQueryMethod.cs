@@ -21,7 +21,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokeSelectSingleStrategyIfPagingInfoIsNull()
         {
-            SystemUnderTest.BuildPagedQuery<TestFixture>(null);
+            SystemUnderTest.BuildPagedQuery<TestClass>(null);
 
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Verify(x => x.GetBuilderStrategy(QueryKind.SelectSingleTable), Times.Once);
@@ -30,7 +30,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillNotInvokeSelectSingleStrategyIfPagingInfoIsNotNull()
         {
-            SystemUnderTest.BuildPagedQuery<TestFixture>(ObjectCreator.CreateNew<PagingInfo>());
+            SystemUnderTest.BuildPagedQuery<TestClass>(ObjectCreator.CreateNew<PagingInfo>());
 
             Mocks.Get<IQueryBuilderStrategyFactory>()
                .Verify(x => x.GetBuilderStrategy(QueryKind.SelectSingleTable), Times.Never());
@@ -39,7 +39,7 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         [Test]
         public void WillInvokePagedSingleStrategy()
         {
-            SystemUnderTest.BuildPagedQuery<TestFixture>(ObjectCreator.CreateNew<PagingInfo>());
+            SystemUnderTest.BuildPagedQuery<TestClass>(ObjectCreator.CreateNew<PagingInfo>());
 
             Mocks.Get<IQueryBuilderStrategyFactory>()
                 .Verify(x => x.GetBuilderStrategy(QueryKind.PagedSingle), Times.Once);

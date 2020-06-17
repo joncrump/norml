@@ -64,7 +64,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         public void WillReturnFieldsWithInstance()
         {
             TableObjectMapping expected = null;
-            TestFixture model = null;
+            TestClass model = null;
 
             throw new NotImplementedException();
 //            model = ObjectCreator.CreateNew<TestFixture>();
@@ -97,7 +97,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
         public void WillReturnSelectedFieldsWithInstance()
         {
             TableObjectMapping expected = null;
-            TestFixture model = null;
+            TestClass model = null;
 
             throw new NotImplementedException();
 //            model = ObjectCreator.CreateNew<TestFixture>();
@@ -132,7 +132,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
 
             tableName = DataGenerator.GenerateString();
 
-            var actual = SystemUnderTest.BuildFields<TestFixture>(tableName: tableName);
+            var actual = SystemUnderTest.BuildFields<TestClass>(tableName: tableName);
 
             Asserter.AssertEquality(tableName, actual.TableName);
         }
@@ -144,7 +144,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
 
             alias = DataGenerator.GenerateString();
 
-            var actual = SystemUnderTest.BuildFields<TestFixture>(alias: alias);
+            var actual = SystemUnderTest.BuildFields<TestClass>(alias: alias);
 
             Asserter.AssertEquality(alias, actual.Alias);
         }

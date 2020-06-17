@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using Moq;
 using Norml.Core.Data.Repositories.Strategies;
 using Norml.Core.Tests.Common.Base;
@@ -9,15 +11,33 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
     [TestFixture]
     public class TheExecuteMultipleMethod : MockTestBase<TestableDatabaseRepository>
     {
+        private Mock<IDatabaseWrapper> _databaseWrapper;
+
         protected override void Setup()
         {
             base.Setup();
 
             var strategy = new Mock<IBuilderStrategy>();
+            _databaseWrapper = new Mock<IDatabaseWrapper>();
+
+            _databaseWrapper.Setup(x => x.CreateCommandText(It.IsAny<string>(), It.IsAny<QueryType>()))
+                .Returns(_databaseWrapper.Object);
+
+            _databaseWrapper.Setup(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()))
+                .Returns(_databaseWrapper.Object);
+            /*
+             *  .WithParameters(queryInfo.Parameters)
+                .ExecuteMultiple<TValue>(strategy, queryInfo.TableObjectMappings);
+             */
+
 
             Mocks.Get<IBuilderStrategyFactory>()
                 .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
                 .Returns(strategy.Object);
+
+            Mocks.Get<IDatabaseFactory>()
+                .Setup(x => x.GetDatabase(It.IsAny<string>()))
+                .Returns(_databaseWrapper.Object);
         }
 
         [Test]
@@ -34,10 +54,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteMultiple<object>(Mock.Of<QueryInfo>(), BuildMode.Joined);
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text),
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -45,10 +64,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteMultiple<object>(Mock.Of<QueryInfo>(), It.IsAny<BuildMode>());
 
-            throw new NotImplementedException();
-//                MockDatabase
-//                    .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()), 
-//                        Times.Once);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -56,10 +74,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteMultiple<object>(Mock.Of<QueryInfo>(), It.IsAny<BuildMode>());
 
-//                MockDatabase
-//                    .Verify(x => x.ExecuteMultiple<object>(It.IsAny<IBuilderStrategy>(), 
-//                        It.IsAny<IEnumerable<TableObjectMapping>>()), Times.Once);
-//            });
+            _databaseWrapper
+                .Verify(x => x.ExecuteMultiple<object>(It.IsAny<IBuilderStrategy>(),
+                    It.IsAny<IEnumerable<TableObjectMapping>>()), Times.AtLeastOnce);
         }
 
         [Test]
@@ -67,9 +84,8 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteMultiple<object>(Mock.Of<QueryInfo>(), BuildMode.Joined);
 
-//                Mocks.Get<Mock<IBuilderStrategyFactory>>()
-//                    .Verify(x => x.GetStrategy(BuildMode.Joined), Times.Once);
-//            });
+            Mocks.Get<IBuilderStrategyFactory>()
+                .Verify(x => x.GetStrategy(BuildMode.Joined), Times.AtLeastOnce);
         }
     }
 }

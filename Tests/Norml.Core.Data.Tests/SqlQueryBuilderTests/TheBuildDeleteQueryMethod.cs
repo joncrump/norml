@@ -25,14 +25,14 @@ namespace Norml.Core.Data.Tests.SqlQueryBuilderTests
         {
             Asserter
                 .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildDeleteQuery<TestFixture>(null, It.IsAny<string>()))
+                    () => SystemUnderTest.BuildDeleteQuery<TestClass>(null, It.IsAny<string>()))
                 .AndVerifyMessageContains("predicate");
         }
 
         [Test]
         public void WillInvokeQueryBuilderStrategy()
         {
-            Expression<Func<TestFixture, bool>> predicate = t => t.Id == 5;
+            Expression<Func<TestClass, bool>> predicate = t => t.Id == 5;
 
             SystemUnderTest.BuildDeleteQuery(predicate);
 

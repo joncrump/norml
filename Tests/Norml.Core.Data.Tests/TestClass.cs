@@ -5,9 +5,9 @@ using Norml.Core.Data.Attributes;
 namespace Norml.Core.Data.Tests
 {
     [Table("dbo.TestTable")]
-    public class TestFixture
+    public class TestClass
     {
-        public TestFixture()
+        public TestClass()
         {
             Values = new List<string>();
         }
