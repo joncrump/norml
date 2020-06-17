@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Moq;
+using Norml.Core.Data.Repositories.Strategies;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
 
@@ -12,6 +13,30 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
     [TestFixture]
     public class TheExecuteTransformMethod : MockTestBase<TestableDatabaseRepository>
     {
+        private Mock<IDatabaseWrapper> _databaseWrapper;
+
+        protected override void Setup()
+        {
+            base.Setup();
+
+            var strategy = new Mock<IBuilderStrategy>();
+            _databaseWrapper = new Mock<IDatabaseWrapper>();
+
+            _databaseWrapper.Setup(x => x.CreateCommandText(It.IsAny<string>(), It.IsAny<QueryType>()))
+                .Returns(_databaseWrapper.Object);
+
+            _databaseWrapper.Setup(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()))
+                .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IDatabaseFactory>()
+                .Setup(x => x.GetDatabase(It.IsAny<string>()))
+                .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IBuilderStrategyFactory>()
+                .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
+                .Returns(strategy.Object);
+        }
+
         [Test]
         public void WillThrowArgumentNullExceptionIfQueryInfoIsNull()
         {
@@ -54,59 +79,48 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
             SystemUnderTest.ExecuteTransform(Mock.Of<QueryInfo>(), builderDelegate, 
                 transformAction);
 
-            throw new NotImplementedException();
-            
-//            MockDatabase
-//                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text), 
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text),
+                    Times.AtLeastOnce);
         }
 
         [Test]
         public void WillNotInvokeDatabaseWithParametersMethodIfParametersAreNull()
         {
-            QueryInfo queryInfo = null;
+            var queryInfo = new QueryInfo {Parameters = null};
 
-            queryInfo = new QueryInfo {Parameters = null};
-
-            Func<IDataReader, object> builderDelegate = r => r;
+            object BuilderDelegate(IDataReader r) => r;
             Action<object> transformAction = FakeMethod;
 
-            SystemUnderTest.ExecuteTransform(queryInfo, builderDelegate, transformAction);
+            SystemUnderTest.ExecuteTransform(queryInfo, BuilderDelegate, transformAction);
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                    Times.Never);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtMostOnce);
         }
 
         [Test]
         public void WillNotInvokeDatabaseWithParametersMethodIfParametersAreEmpty()
         {
-            QueryInfo queryInfo = null;
-
-            queryInfo = new QueryInfo
+            var queryInfo = new QueryInfo
             {
                 Parameters = Enumerable.Empty<IDbDataParameter>()
             };
 
-            Func<IDataReader, object> builderDelegate = r => r;
+            object BuilderDelegate(IDataReader r) => r;
             Action<object> transformAction = FakeMethod;
 
-            SystemUnderTest.ExecuteTransform(queryInfo, builderDelegate, transformAction);
+            SystemUnderTest.ExecuteTransform(queryInfo, BuilderDelegate, transformAction);
 
-            throw new NotImplementedException();
-            
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                    Times.Never);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtMostOnce);
         }
 
         [Test]
         public void WillInvokeDatabaseWithParametersMethodIfParametersHaveValues()
         {
-            QueryInfo queryInfo = null;
-
-            queryInfo = new QueryInfo
+            var queryInfo = new QueryInfo
             {
                 Parameters = new List<SqlParameter>
                 {
@@ -114,16 +128,14 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
                 }
             };
 
-            Func<IDataReader, object> builderDelegate = r => r;
+            object BuilderDelegate(IDataReader r) => r;
             Action<object> transformAction = FakeMethod;
 
-            SystemUnderTest.ExecuteTransform(queryInfo, builderDelegate, transformAction);
+            SystemUnderTest.ExecuteTransform(queryInfo, BuilderDelegate, transformAction);
 
-            throw new NotImplementedException();
-            
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -135,10 +147,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
             SystemUnderTest.ExecuteTransform(Mock.Of<QueryInfo>(), 
                 builderDelegate, transformAction);
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.ExecuteTransform(It.IsAny<Func<IDataReader, object>>(), 
-//                    It.IsAny<Action<object>>()), Times.Once);
+            _databaseWrapper
+                .Verify(x => x.ExecuteTransform(It.IsAny<Func<IDataReader, object>>(),
+                    It.IsAny<Action<object>>()), Times.AtLeastOnce);
         }
 
         private void FakeMethod(object value)

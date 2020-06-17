@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using Moq;
 using Norml.Core.Data.Repositories.Strategies;
 using Norml.Core.Tests.Common.Base;
@@ -9,11 +11,24 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
     [TestFixture]
     public class TheExecuteSingleMethod : MockTestBase<TestableDatabaseRepository>
     {
+        private Mock<IDatabaseWrapper> _databaseWrapper;
+
         protected override void Setup()
         {
             base.Setup();
 
             var strategy = new Mock<IBuilderStrategy>();
+            _databaseWrapper = new Mock<IDatabaseWrapper>();
+
+            _databaseWrapper.Setup(x => x.CreateCommandText(It.IsAny<string>(), It.IsAny<QueryType>()))
+                .Returns(_databaseWrapper.Object);
+
+            _databaseWrapper.Setup(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()))
+                .Returns(_databaseWrapper.Object);
+
+            Mocks.Get<IDatabaseFactory>()
+                .Setup(x => x.GetDatabase(It.IsAny<string>()))
+                .Returns(_databaseWrapper.Object);
 
             Mocks.Get<IBuilderStrategyFactory>()
                 .Setup(x => x.GetStrategy(It.IsAny<BuildMode>()))
@@ -43,10 +58,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteSingle<object>(Mock.Of<QueryInfo>());
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text), 
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.CreateCommandText(It.IsAny<string>(), QueryType.Text),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -54,10 +68,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteSingle<object>(Mock.Of<QueryInfo>());
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()), 
-//                    Times.Once);
+            _databaseWrapper
+                .Verify(x => x.WithParameters(It.IsAny<IEnumerable<IDbDataParameter>>()),
+                    Times.AtLeastOnce);
         }
 
         [Test]
@@ -65,10 +78,9 @@ namespace Norml.Core.Data.Tests.DatabaseRepositoryBaseTests
         {
             SystemUnderTest.ExecuteSingle<object>(Mock.Of<QueryInfo>());
 
-            throw new NotImplementedException();
-//            MockDatabase
-//                .Verify(x => x.ExecuteSingle<object>(It.IsAny<IBuilderStrategy>(), 
-//                    It.IsAny<IEnumerable<TableObjectMapping>>()), Times.Once);
+            _databaseWrapper
+                .Verify(x => x.ExecuteSingle<object>(It.IsAny<IBuilderStrategy>(),
+                    It.IsAny<IEnumerable<TableObjectMapping>>()), Times.AtLeastOnce);
         }
     }
 }
