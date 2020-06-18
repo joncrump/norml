@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
@@ -14,7 +15,7 @@ namespace Norml.Core.Data.Repositories.Strategies
     {
         private static readonly MethodInfo WhereMethod;
         private readonly IObjectMapperFactory _objectMappingFactory;
-        private readonly IDatabaseConfiguration _databaseConfiguration;
+        private readonly IConfiguration _configuration;
 
         static DictionaryBasedDataReaderJoinedBuilderStrategy()
         {
@@ -22,10 +23,10 @@ namespace Norml.Core.Data.Repositories.Strategies
         }
 
         public DictionaryBasedDataReaderJoinedBuilderStrategy(IDataReaderBuilder dataReaderBuilder, IObjectMapperFactory objectMappingFactory, 
-            IDatabaseConfiguration databaseConfiguration) : base(dataReaderBuilder)
+            IConfiguration configuration) : base(dataReaderBuilder)
         {
             _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
-            _databaseConfiguration = databaseConfiguration.ThrowIfNull(nameof(databaseConfiguration));
+            _configuration = configuration.ThrowIfNull(nameof(configuration));
         }
 
         public IEnumerable<TValue> BuildItems<TValue>(dynamic parameters, IDataReader dataSource) 
@@ -38,7 +39,7 @@ namespace Norml.Core.Data.Repositories.Strategies
             IDictionary<object, TValue> parents = new Dictionary<object, TValue>();
 
             var type = typeof (TValue);
-            var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+            var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
             var mapping = mapper.GetMappingFor<TValue>();
             var primaryKeyMappings = mapping.PropertyMappings
                 .Where(p => p.IsPrimaryKey);
@@ -235,7 +236,7 @@ namespace Norml.Core.Data.Repositories.Strategies
 
         private PropertyInfo GetChildPrimaryKey(Type childType)
         {
-            var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+            var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
             var mapping = mapper.GetMappingForType(childType);
             var primaryKeyMapping = mapping.PropertyMappings
                 .FirstOrDefault(p => p.IsPrimaryKey);

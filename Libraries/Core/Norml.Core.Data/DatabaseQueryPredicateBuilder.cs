@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Norml.Core.Data.Attributes;
 using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
@@ -26,7 +27,7 @@ namespace Norml.Core.Data
         private string _fieldPrefix;
 
         private readonly IObjectMapperFactory _objectMappingFactory;
-        private readonly IDatabaseConfiguration _databaseConfiguration;
+        private readonly IConfiguration _configuration;
 
         public int? Skip { get; private set; }
         public int? Take { get; private set; }
@@ -34,10 +35,10 @@ namespace Norml.Core.Data
         public string WhereClause { get; private set; }
 
         public DatabaseQueryPredicateBuilder(IObjectMapperFactory objectMappingFactory,
-            IDatabaseConfiguration databaseConfiguration)
+            IConfiguration configuration)
         {
             _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
-            _databaseConfiguration = databaseConfiguration.ThrowIfNull(nameof(databaseConfiguration));
+            _configuration = configuration.ThrowIfNull(nameof(configuration));
             _parameters = new List<IDbDataParameter>();
         }
 
@@ -140,7 +141,7 @@ namespace Norml.Core.Data
                 var field = ParseStartsWithExpression(m);
                 var memberExpression = (MemberExpression)m.Object;
                 var property = memberExpression.Member as PropertyInfo;
-                var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+                var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
                 var mapping = mapper.GetMappingForType(_declaringType);
                 var propertyMapping = mapping.PropertyMappings
                     .FirstOrDefault(p => p.PropertyName == property.Name);
@@ -155,7 +156,7 @@ namespace Norml.Core.Data
                 var field = ParseStartsWithExpression(m);
                 var memberExpression = (MemberExpression)m.Object;
                 var property = memberExpression.Member as PropertyInfo;
-                var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+                var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
                 var mapping = mapper.GetMappingForType(_declaringType);
                 var propertyMapping = mapping.PropertyMappings
                     .FirstOrDefault(p => p.PropertyName == property.Name);
@@ -172,7 +173,7 @@ namespace Norml.Core.Data
                 var memberExpression = (MemberExpression)m.Object;
 
                 var property = memberExpression.Member as PropertyInfo;
-                var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+                var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
                 var mapping = mapper.GetMappingForType(_declaringType);
                 var propertyMapping = mapping.PropertyMappings
                     .FirstOrDefault(p => p.PropertyName == property.Name);
@@ -187,7 +188,7 @@ namespace Norml.Core.Data
                 var field = ParseEqualsExpression(m);
                 var memberExpression = (MemberExpression)m.Object;
                 var property = memberExpression.Member as PropertyInfo;
-                var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+                var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
                 var mapping = mapper.GetMappingForType(_declaringType);
                 var propertyMapping = mapping.PropertyMappings
                     .FirstOrDefault(p => p.PropertyName == property.Name);
@@ -361,7 +362,7 @@ namespace Norml.Core.Data
             {
                 var property = memberExpression.Member as PropertyInfo;
                 var fieldName = GetFieldName(property);
-                var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+                var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
                 var mapping = mapper.GetMappingForType(_declaringType);
                 var propertyMapping = mapping.PropertyMappings
                     .FirstOrDefault(p => p.PropertyName == property.Name);
@@ -435,7 +436,7 @@ namespace Norml.Core.Data
 
         private string GetFieldName(PropertyInfo property)
         {
-            var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+            var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
             var mapping = mapper.GetMappingForType(_declaringType);
             var propertyMapping = mapping.PropertyMappings
                 .FirstOrDefault(p => p.PropertyName == property.Name);

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Norml.Core.Data.Constants;
 using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
@@ -16,15 +17,15 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
     {
         private readonly IPredicateBuilder _predicateBuilder;
         private readonly IObjectMapperFactory _objectMappingFactory;
-        private readonly IDatabaseConfiguration _databaseConfiguration;
+        private readonly IConfiguration _configuration;
 
         public PagedQueryBuilderStrategy(IFieldHelper fieldHelper, IPredicateBuilder predicateBuilder, 
-            IObjectMapperFactory objectMappingFactory, IDatabaseConfiguration databaseConfiguration) 
+            IObjectMapperFactory objectMappingFactory, IConfiguration configuration) 
             : base(fieldHelper)
         {
             _predicateBuilder = predicateBuilder.ThrowIfNull(nameof(predicateBuilder));
             _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
-            _databaseConfiguration = databaseConfiguration.ThrowIfNull(nameof(databaseConfiguration));
+            _configuration = configuration.ThrowIfNull(nameof(configuration));
         }
 
         public QueryInfo BuildQuery<TValue>(dynamic parameters = null) where TValue : class
@@ -34,7 +35,7 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
             Expression<Func<TValue, bool>> predicate = parameters?.Predicate;
             bool canDirtyRead = parameters?.CanDirtyRead;
             bool includeParameters = parameters?.IncludeParameters;
-            var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+            var mapper = _objectMappingFactory.GetMapper(Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]));
             var mapping = mapper.GetMappingFor<TValue>();
             var queryBuilder = new StringBuilder();
             var fields = FieldHelper.BuildFields<TValue>(desiredFields);

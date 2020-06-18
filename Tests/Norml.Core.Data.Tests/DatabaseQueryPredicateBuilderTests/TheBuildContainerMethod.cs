@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using Norml.Core.Data.Attributes;
 using Norml.Core.Data.Mappings;
@@ -29,6 +30,10 @@ namespace Norml.Core.Data.Tests.DatabaseQueryPredicateBuilderTests
             Mocks.Get<IObjectMapperFactory>()
                 .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
                 .Returns(mapper.Object);
+
+            Mocks.Get<IConfiguration>()
+                .Setup(x => x[Constants.Configuration.MappingKind])
+                .Returns("Attribute");
         }
 
         [Test]

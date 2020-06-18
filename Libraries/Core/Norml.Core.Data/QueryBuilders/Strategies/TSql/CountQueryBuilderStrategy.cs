@@ -1,4 +1,6 @@
-﻿using Norml.Core.Data.Helpers;
+﻿using System;
+using Microsoft.Extensions.Configuration;
+using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
 
 namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
@@ -6,18 +8,19 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
     public class CountQueryBuilderStrategy : QueryBuilderStrategyBase, IQueryBuilderStrategy
     {
         private readonly IObjectMapperFactory _objectMappingFactory;
-        private readonly IDatabaseConfiguration _databaseConfiguration;
+        private readonly IConfiguration _configuration;
 
         public CountQueryBuilderStrategy(IFieldHelper fieldHelper, IObjectMapperFactory objectMappingFactory, 
-            IDatabaseConfiguration databaseConfiguration) : base(fieldHelper)
+            IConfiguration configuration) : base(fieldHelper)
         {
             _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
-            _databaseConfiguration = databaseConfiguration.ThrowIfNull(nameof(databaseConfiguration));
+            _configuration = configuration.ThrowIfNull(nameof(configuration));
         }
 
         public QueryInfo BuildQuery<TValue>(dynamic parameters) where TValue : class
         {
-            var mapper = _objectMappingFactory.GetMapper(_databaseConfiguration.MappingKind);
+            var mappingKind = Enum.Parse<MappingKind>(_configuration[Constants.Configuration.MappingKind]);
+            var mapper = _objectMappingFactory.GetMapper(mappingKind);
             var mapping = mapper.GetMappingFor<TValue>();
             var table = mapping.DataSource;
             var count = mapping.CountField;
