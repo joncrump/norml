@@ -16,27 +16,6 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
     public class TheBuildFieldsMethod : MockTestBase<FieldHelper>
     {
         [Test]
-        public void WillThrowInvalidOperationExceptionIfTableNameIsNullAndObjectHasNoTableAttribute()
-        {
-            // ReSharper disable once RedundantArgumentDefaultValue
-            Asserter
-                .AssertException<InvalidOperationException>(
-                    () => SystemUnderTest.BuildFields<object>(tableName: null))
-                .AndVerifyMessageContains(
-                    "Cannot build query.  Type {0} has no table attributes".FormatString(typeof (object)));
-        }
-
-        [Test]
-        public void WillThrowInvalidOperationExceptionIfTableNameIsEmptyAndObjectHasNoTableAttribute()
-        {
-            Asserter
-                .AssertException<InvalidOperationException>(
-                    () => SystemUnderTest.BuildFields<object>(tableName: String.Empty))
-                .AndVerifyMessageContains(
-                    "Cannot build query.  Type {0} has no table attributes".FormatString(typeof (object)));
-        }
-
-        [Test]
         public void WillReturnFieldsWithoutInstance()
         {
             var expected = new TableObjectMapping
@@ -180,7 +159,8 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
                         DatabaseType = SqlDbType.Int,
                         AllowDbNull = true,
                         ParameterName = "@id",
-                        PropertyName = "Id"
+                        PropertyName = "Id",
+                        IsIdentity = true
                     },
                     new PropertyMapping
                     {
@@ -191,7 +171,7 @@ namespace Norml.Core.Data.Tests.FieldHelperTests
                     },
                     new PropertyMapping
                     {
-                        Field = "Bar",
+                        Field = "PioneerSquareBar",
                         DatabaseType = SqlDbType.NVarChar,
                         ParameterName =  "@itsFridayLetsGoToTheBar",
                         PropertyName = "Bar"
