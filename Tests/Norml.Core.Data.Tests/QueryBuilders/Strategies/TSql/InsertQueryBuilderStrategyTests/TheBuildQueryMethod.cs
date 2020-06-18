@@ -16,14 +16,6 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.InsertQueryBuilder
     public class TheBuildQueryMethod : MockTestBase<InsertQueryBuilderStrategy>
     {
         [Test]
-        public void WillThrowArgumentNullExceptionIfParametersIsNull()
-        {
-            Asserter
-                .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildQuery<TestClass>());
-        }
-
-        [Test]
         public void WillBuildInsertQuery()
         {
             QueryInfo expected = null;

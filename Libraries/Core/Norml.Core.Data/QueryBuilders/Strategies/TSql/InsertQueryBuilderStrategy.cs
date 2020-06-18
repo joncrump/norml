@@ -13,8 +13,6 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 
         public QueryInfo BuildQuery<TValue>(dynamic parameters = null) where TValue : class
         {
-            Guard.ThrowIfNull<string>("parameters", parameters);
-
             TValue model = parameters.Model; 
             bool returnNewId = parameters.ReturnNewId; 
             bool ignoreIdentity = parameters.IgnoreIdentity;

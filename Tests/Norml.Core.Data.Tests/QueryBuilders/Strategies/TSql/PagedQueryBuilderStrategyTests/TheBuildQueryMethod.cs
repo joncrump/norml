@@ -4,6 +4,7 @@ using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using Norml.Core.Data.QueryBuilders.Strategies.TSql;
 using Norml.Core.Tests.Common.Base;
@@ -41,6 +42,10 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderS
             Mocks.Get<IPredicateBuilder>()
                 .Setup(x => x.BuildContainer(It.IsAny<Expression>(), It.IsAny<Type>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new QueryContainer("[FirstName] LIKE ('Jo%')"));
+
+            Mocks.Get<IConfiguration>()
+                .Setup(x => x[Constants.Configuration.MappingKind])
+                .Returns("Attribute");
 
             dynamic parameters = new ExpandoObject();
             Expression<Func<ClientDataModel, bool>> predicate = m => m.FirstName.StartsWith("Jo%");

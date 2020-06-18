@@ -17,8 +17,6 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
 
         public QueryInfo BuildQuery<TValue>(dynamic parameters) where TValue : class
         {
-            Guard.ThrowIfNull<string>("parameters", parameters);
-
             Expression<Func<TValue, bool>> predicate = parameters.Predicate;
             string tableName = parameters.TableName;
 

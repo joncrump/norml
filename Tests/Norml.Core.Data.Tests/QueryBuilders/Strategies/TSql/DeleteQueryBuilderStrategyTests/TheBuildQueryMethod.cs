@@ -32,15 +32,6 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.DeleteQueryBuilder
         }
 
         [Test]
-        public void WillThrowArgumentNullExceptionIfParametersAreNull()
-        {
-            Asserter
-                .AssertException<ArgumentNullException>(
-                    () => SystemUnderTest.BuildQuery<TestClass>(null))
-                .AndVerifyHasParameter("parameters");
-        }
-
-        [Test]
         public void WillBuildDeleteQueryWithPredicate()
         {
             QueryInfo expected = null;
