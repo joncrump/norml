@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+using Norml.Core.Data.Attributes;
 using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
 
@@ -12,10 +14,12 @@ namespace Norml.Core.Data
         private DataTable _dataTable;
         private IDictionary<string, string> _columnMappings;
         private IObjectMapperFactory _objectMappingFactory;
+        private readonly IConfiguration _configuration;
 
-        public ModelDataConverter(IObjectMapperFactory objectMappingFactory)
+        public ModelDataConverter(IObjectMapperFactory objectMappingFactory, IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
+            _configuration = configuration.ThrowIfNull(nameof(configuration));
         }
 
         public IDatatableObjectMapping ConvertToDataTable<TModel>(IEnumerable<TModel> models)
@@ -29,20 +33,21 @@ namespace Norml.Core.Data
 
         private void BuildDataTable<TModel>(IEnumerable<TModel> models)
         {
-            throw new NotImplementedException();
-            //var type = typeof(TModel);
-            //var tableAttribute = (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
+            var mappingKind = (MappingKind)Enum.Parse(typeof(MappingKind), _configuration["Norml:MappingKind"]);
+            var objectMapping = _objectMappingFactory.GetMapper(mappingKind);
+            var typeMapping = objectMapping?.GetMappingFor<TModel>();
 
-            //_dataTable = tableAttribute.IsNotNull()
-            //    ? BuildTableBasedOnMetadata(models, tableAttribute)
-            //    : BuildTableBasedOnModels(models);
+
+            _dataTable = typeMapping != null && typeMapping.DataSource.IsNotNullOrEmpty()
+                ? BuildTableBasedOnMetadata(models, typeMapping)
+                : BuildTableBasedOnModels(models);
         }
 
         private DataTable BuildTableBasedOnModels<TModel>(IEnumerable<TModel> models)
         {
             var table = new DataTable();
 
-            BuildColumnsBasedOnFieldAttributesInternal<TModel>(table);
+            BuildColumnsBasedOnPropertiesInternal<TModel>(table);
 
             foreach (var model in models)
             {
@@ -59,90 +64,65 @@ namespace Norml.Core.Data
 
         private DataTable BuildTableBasedOnMetadata<TModel>(IEnumerable<TModel> models, TypeMapping mapping)
         {
-            throw new NotImplementedException();
-            //var table = new DataTable
-            //{
-            //    TableName = tableAttribute.Name
-            //};
+            var table = new DataTable
+            {
+                TableName = mapping.DataSource
+            };
 
-            //BuildColumnsBasedOnFieldAttributesInternal<TModel>(table);
+            BuildColumnsBasedOnTypeMappingInternal(table, mapping);
 
-            //foreach (var model in models)
-            //{
-            //    var values = model
-            //        .ToDictionary(new[] {typeof(FieldMetadataAttribute)})
-            //        .Values
-            //        .ToArray();
+            foreach (var model in models)
+            {
+                var values = model
+                    .ToDictionary(new[] { typeof(FieldMetadataAttribute) })
+                    .Values
+                    .ToArray();
 
-            //    table.Rows.Add(values);
-            //}
+                table.Rows.Add(values);
+            }
 
-            //return table;
+            return table;
         }
 
         private void BuildColumnsBasedOnPropertiesInternal<TModel>(DataTable table)
         {
-            throw new NotImplementedException();
-            //_columnMappings = new Dictionary<string, string>();
+            _columnMappings = new Dictionary<string, string>();
 
-            //foreach (var property in typeof(TModel).GetProperties())
-            //{
-            //    Type type;
+            foreach (var property in typeof(TModel).GetProperties())
+            {
+                Type type;
 
-            //    if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            //    {
-            //        type = property.PropertyType.GetGenericArguments()[0];
-            //    }
-            //    else
-            //    {
-            //        type = property.PropertyType;
-            //    }
+                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    type = property.PropertyType.GetGenericArguments()[0];
+                }
+                else
+                {
+                    type = property.PropertyType;
+                }
 
-            //    table.Columns.Add(new DataColumn(property.Name, type));
+                table.Columns.Add(new DataColumn(property.Name, type));
 
-            //    _columnMappings.Add(property.Name, property.Name);
-            //}
+                _columnMappings.Add(property.Name, property.Name);
+            }
         }
 
-        private void BuildColumnsBasedOnFieldAttributesInternal<TModel>(DataTable table)
+        private void BuildColumnsBasedOnTypeMappingInternal(DataTable table, TypeMapping typeMapping)
         {
-            throw new NotImplementedException();
-            //_columnMappings = new Dictionary<string, string>();
-            //var columns = new List<Tuple<string, int, bool, Type>>();
+            _columnMappings = new Dictionary<string, string>();
+            var columns = typeMapping.PropertyMappings
+                .Select(propertyMapping => new Tuple<string, int, bool, Type>(propertyMapping.Field, propertyMapping.Order, propertyMapping.AllowDbNull, propertyMapping.MappedType))
+                .ToList();
 
-            //foreach (var property in typeof(TModel).GetProperties())
-            //{
-            //    var attribute = (FieldMetadataAttribute) property.GetCustomAttributes(typeof(FieldMetadataAttribute), true).FirstOrDefault();
+            foreach (var column in columns.OrderBy(c => c.Item2))
+            {
+                table.Columns.Add(new DataColumn(column.Item1, column.Item4)
+                {
+                    AllowDBNull = column.Item3
+                });
 
-            //    if (attribute.IsNull())
-            //    {
-            //        continue;
-            //    }
-
-            //    Type type;
-
-            //    if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            //    {
-            //        type = property.PropertyType.GetGenericArguments()[0];
-            //    }
-            //    else
-            //    {
-            //        type = property.PropertyType;
-            //    }
-
-            //    columns.Add(new Tuple<string, int, bool, Type>(attribute.FieldName, attribute.Order.HasValue ? attribute.Order.Value : 0, 
-            //        attribute.AllowDbNull, type));
-            //}
-
-            //foreach (var column in columns.OrderBy(c => c.Item2))
-            //{
-            //    table.Columns.Add(new DataColumn(column.Item1, column.Item4)
-            //    {
-            //        AllowDBNull = column.Item3
-            //    });
-
-            //    _columnMappings.Add(column.Item1, column.Item1);
-            //}
+                _columnMappings.Add(column.Item1, column.Item1);
+            }
         }
     }
 }

@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Configuration;
+using Moq;
+using Norml.Core.Data.Attributes;
+using Norml.Core.Data.Mappings;
 using Norml.Core.Exceptions;
+using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
 
@@ -36,10 +41,7 @@ namespace Norml.Core.Data.Tests.ModelDataConverterTests
             DatatableObjectMapping expected = null;
             IEnumerable<TestData> models = null;
 
-            models = CreateEnumerableOfItems(() => ObjectCreator.CreateNew<TestData>(new Dictionary<string, object>
-            {
-                {"Baz", null}
-            }));
+            models = CreateEnumerableOfItems(() => ObjectCreator.CreateNew<TestData>());
 
             expected = new DatatableObjectMapping(BuildDataTable(models), new Dictionary<string, string>
             {
@@ -48,8 +50,22 @@ namespace Norml.Core.Data.Tests.ModelDataConverterTests
                 {"DateLastUpdated", "DateLastUpdated"},
                 {"Foo", "Foo"},
                 {"Bar", "Bar"},
-                {"Baz", "Baz"}
+                {"Baz", "Baz"},
             });
+
+            var dataMapper = new Mock<IDataMapper>();
+
+            Mocks.Get<IConfiguration>()
+                .Setup(x => x["Norml:MappingKind"])
+                .Returns(MappingKind.Attribute.ToString);
+
+            Mocks.Get<IObjectMapperFactory>()
+                .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
+                .Returns(dataMapper.Object);
+
+            dataMapper
+                .Setup(x => x.GetMappingFor<TestData>())
+                .Returns(GetTypeMapping);
 
             var actual = SystemUnderTest.ConvertToDataTable(models);
             Expression<Action<KeyValuePair<string, string>, KeyValuePair<string, string>>> expression =
@@ -88,78 +104,138 @@ namespace Norml.Core.Data.Tests.ModelDataConverterTests
 
         private DataTable BuildDataTable(IEnumerable<TestData> models)
         {
-            throw new NotImplementedException();
-            //var type = typeof(TestData);
+            var type = typeof(TestData);
 
-            //var table = new DataTable();
+            var table = new DataTable();
 
-            //var tableAttribute = (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
+            var tableAttribute = (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
 
-            //table.TableName = tableAttribute.Name;
+            table.TableName = tableAttribute.Name;
 
-            //BuildColumns(table);
+            BuildColumns(table);
 
-            //foreach (var model in models)
-            //{
-            //    var dictionary = model.ToDictionary(new[] { typeof(FieldMetadataAttribute) });
+            foreach (var model in models)
+            {
+                var dictionary = model.ToDictionary(new[] { typeof(FieldMetadataAttribute) });
 
-            //    table.Rows.Add(dictionary.Values.ToArray());
-            //}
+                table.Rows.Add(dictionary.Values.ToArray());
+            }
 
-            //return table;
+            return table;
         }
 
-        //private void BuildColumns(DataTable table)
-        //{
-        //    foreach (var property in typeof(TestData).GetProperties())
-        //    {
-        //        var attribute = (FieldMetadataAttribute)
-        //                                   property.GetCustomAttributes(typeof(FieldMetadataAttribute), true).FirstOrDefault();
+        private void BuildColumns(DataTable table)
+        {
+            foreach (var property in typeof(TestData).GetProperties())
+            {
+                var attribute = (FieldMetadataAttribute)
+                                           property.GetCustomAttributes(typeof(FieldMetadataAttribute), true).FirstOrDefault();
 
-        //        if (attribute.IsNull())
-        //        {
-        //            continue;
-        //        }
+                if (attribute.IsNull())
+                {
+                    continue;
+                }
 
-        //        Type type;
+                Type type;
 
-        //        // We need to check whether the property is NULLABLE
-        //        if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-        //        {
-        //            // If it is NULLABLE, then get the underlying type. eg if "Nullable<int>" then this will return just "int"
-        //            type = property.PropertyType.GetGenericArguments()[0];
-        //        }
-        //        else
-        //        {
-        //            type = property.PropertyType;
-        //        }
+                // We need to check whether the property is NULLABLE
+                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    // If it is NULLABLE, then get the underlying type. eg if "Nullable<int>" then this will return just "int"
+                    type = property.PropertyType.GetGenericArguments()[0];
+                }
+                else
+                {
+                    type = property.PropertyType;
+                }
 
-        //        table.Columns.Add(attribute.FieldName, type);
-        //    }
-        //}
+                table.Columns.Add(attribute.FieldName, type);
+            }
+        }
 
-        //[Table("MyTable")]
+        private TypeMapping GetTypeMapping()
+        {
+            return new TypeMapping
+            {
+                DataSource = "MyTable",
+                Type = typeof(TestData),
+                PropertyMappings = new List<PropertyMapping>
+                {
+                    new PropertyMapping
+                    {
+                        Field = "Id",
+                        DatabaseType = SqlDbType.UniqueIdentifier, 
+                        ParameterName = "@id",
+                        PropertyName = "Id",
+                        MappedType = typeof(Guid)
+                    }, 
+                    new PropertyMapping
+                    {
+                        Field = "DateCreated",
+                        DatabaseType = SqlDbType.SmallDateTime,
+                        ParameterName = "@dateCreated",
+                        PropertyName = "DateCreated",
+                        MappedType = typeof(DateTime)
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "DateLastUpdated",
+                        DatabaseType = SqlDbType.SmallDateTime,
+                        ParameterName = "@dateLastUpdated",
+                        PropertyName = "DateLastUpdated",
+                        MappedType = typeof(DateTime)
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "Foo",
+                        DatabaseType = SqlDbType.NVarChar,
+                        ParameterName = "@foo",
+                        PropertyName = "Foo",
+                        MappedType = typeof(string)
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "Bar",
+                        DatabaseType = SqlDbType.Int,
+                        ParameterName = "@bar",
+                        PropertyName = "Bar",
+                        MappedType = typeof(int)
+                    },
+                    new PropertyMapping
+                    {
+                        Field = "Baz",
+                        DatabaseType = SqlDbType.Int,
+                        ParameterName = "@baz",
+                        PropertyName = "Baz",
+                        MappedType = typeof(int),
+                        AllowDbNull = true
+                    }
+                }
+            };
+        }
+
+        [Table("MyTable")]
         public class TestData : IModel
         {
-            //[FieldMetadata("Id", SqlDbType.UniqueIdentifier, "@id")]
+            [FieldMetadata("Id", SqlDbType.UniqueIdentifier, "@id")]
             public Guid Id { get; set; }
 
             public DateTime EnteredDate { get; set; }
             public DateTime UpdatedDate { get; set; }
 
-            //[FieldMetadata("DateCreated", SqlDbType.SmallDateTime, "@dateCreated")]
+            [FieldMetadata("DateCreated", SqlDbType.SmallDateTime, "@dateCreated")]
             public DateTime DateCreated { get; set; }
 
-            //[FieldMetadata("DateLastUpdated", SqlDbType.SmallDateTime, "@dateLastUpdated")]
+            [FieldMetadata("DateLastUpdated", SqlDbType.SmallDateTime, "@dateLastUpdated")]
             public DateTime DateLastUpdated { get; set; }
 
-            //[FieldMetadata("Foo", SqlDbType.NVarChar, "@foo")]
+            [FieldMetadata("Foo", SqlDbType.NVarChar, "@foo")]
             public string Foo { get; set; }
 
-            //[FieldMetadata("Bar", SqlDbType.Int, "@bar")]
+            [FieldMetadata("Bar", SqlDbType.Int, "@bar")]
             public int Bar { get; set; }
 
-            //[FieldMetadata("Baz", SqlDbType.Int, "@baz", allowDbNull: true)]
+            [FieldMetadata("Baz", SqlDbType.Int, "@baz", allowDbNull: true)]
             public int? Baz { get; set; }
         }
     }
