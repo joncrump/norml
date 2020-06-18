@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using Moq;
 using Norml.Core.Data.Mappings;
-using Norml.Core.Extensions;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Norml.Core.Data.Tests.FieldHelperTests
 {

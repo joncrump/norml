@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Norml.Core.Data.Constants
+﻿namespace Norml.Core.Data.Constants
 {
     public static class Configuration
     {

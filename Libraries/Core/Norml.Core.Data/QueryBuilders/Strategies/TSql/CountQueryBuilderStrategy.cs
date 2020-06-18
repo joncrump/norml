@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
-using Norml.Core.Data.Helpers;
 using Norml.Core.Data.Mappings;
 
 namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
