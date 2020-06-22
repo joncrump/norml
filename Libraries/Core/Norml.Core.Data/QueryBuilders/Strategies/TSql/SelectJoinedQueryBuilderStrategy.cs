@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Norml.Core.Data.Attributes;
 using Norml.Core.Data.Mappings;
 using Norml.Core.Extensions;
 
@@ -21,52 +22,50 @@ namespace Norml.Core.Data.QueryBuilders.Strategies.TSql
             IObjectMapperFactory objectMappingFactory) 
             : base(fieldHelper)
         {
-            throw new NotImplementedException();
-
-            _predicateBuilder = Guard.ThrowIfNull("predicateBuilder", predicateBuilder);
-            _queryBuilderStrategyFactory = Guard.ThrowIfNull("queryBuilderStrategyFactory", queryBuilderStrategyFactory);
+            _predicateBuilder = predicateBuilder.ThrowIfNull(nameof(predicateBuilder));
+            _queryBuilderStrategyFactory = queryBuilderStrategyFactory.ThrowIfNull(nameof(queryBuilderStrategyFactory));
+            _objectMappingFactory = objectMappingFactory.ThrowIfNull(nameof(objectMappingFactory));
         }
 
         public QueryInfo BuildQuery<TValue>(dynamic parameters = null) where TValue : class
         {
-            throw new NotImplementedException();
-            //Expression<Func<TValue, bool>> predicate = parameters.Predicate;
-            //bool canDirtyRead = parameters.CanDirtyRead;
-            //bool includeParameters = parameters.IncludeParameters;
-            //IEnumerable<string> desiredFields = parameters.DesiredFields;
-            //string tableName = parameters.TableName;
+            Expression<Func<TValue, bool>> predicate = parameters.Predicate;
+            bool canDirtyRead = parameters.CanDirtyRead;
+            bool includeParameters = parameters.IncludeParameters;
+            IEnumerable<string> desiredFields = parameters.DesiredFields;
+            string tableName = parameters.TableName;
 
-            //var joinProperties = typeof(TValue)
-            //    .GetProperties()
-            //    .SafeWhere(p => p.GetCustomAttributes(typeof(JoinAttribute), true).IsNotNullOrEmpty())
-            //    .SafeOrderBy(p => p.Name)
-            //    .ToSafeList();
+            var joinProperties = typeof(TValue)
+                .GetProperties()
+                .SafeWhere(p => p.GetCustomAttributes(typeof(JoinAttribute), true).IsNotNullOrEmpty())
+                .SafeOrderBy(p => p.Name)
+                .ToSafeList();
 
-            //if (joinProperties.IsNullOrEmpty())
-            //{
-            //    var strategy = _queryBuilderStrategyFactory.GetBuilderStrategy(QueryKind.SelectSingleTable);
+            if (joinProperties.IsNullOrEmpty())
+            {
+                var strategy = _queryBuilderStrategyFactory.GetBuilderStrategy(QueryKind.SelectSingleTable);
 
-            //    return strategy.BuildQuery<TValue>(parameters);
-            //}
+                return strategy.BuildQuery<TValue>(parameters);
+            }
 
-            //var tableFieldMappings = GetTableObjectMappings<TValue>(desiredFields, tableName, joinProperties);
-            //var queryBuilder = new StringBuilder();
+            var tableFieldMappings = GetTableObjectMappings<TValue>(desiredFields, tableName, joinProperties);
+            var queryBuilder = new StringBuilder();
 
-            //queryBuilder.Append("SELECT ");
+            queryBuilder.Append("SELECT ");
 
-            //BuildJoinedFields(tableFieldMappings, queryBuilder);
+            BuildJoinedFields(tableFieldMappings, queryBuilder);
 
-            //queryBuilder.Append(" ");
+            queryBuilder.Append(" ");
 
-            //var tableFieldInfo = tableFieldMappings.First();
+            var tableFieldInfo = tableFieldMappings.First();
 
-            //BuildFromJoinClause(tableFieldMappings, queryBuilder, canDirtyRead);
-            //var dbParameters = BuildWhereClause(predicate, includeParameters, queryBuilder, tableFieldInfo.Alias, 
-            //    "{0}_".FormatString(tableFieldInfo.Alias));
+            BuildFromJoinClause(tableFieldMappings, queryBuilder, canDirtyRead);
+            var dbParameters = BuildWhereClause(predicate, includeParameters, queryBuilder, tableFieldInfo.Alias,
+                "{0}_".FormatString(tableFieldInfo.Alias));
 
-            //queryBuilder.Append(";");
+            queryBuilder.Append(";");
 
-            //return new QueryInfo(queryBuilder.ToString().Trim(), tableFieldMappings, dbParameters);
+            return new QueryInfo(queryBuilder.ToString().Trim(), tableFieldMappings, dbParameters);
         }
 
         private IEnumerable<IDbDataParameter> BuildWhereClause<TValue>(Expression<Func<TValue, bool>> predicate, bool includeParameters, StringBuilder queryBuilder, 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Configuration;
 using Moq;
+using Norml.Core.Data.Mappings;
 using Norml.Core.Data.QueryBuilders.Strategies.TSql;
 using Norml.Core.Tests.Common.Base;
 using NUnit.Framework;
@@ -18,19 +19,19 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderS
         [Test]
         public void WillBuildQuery()
         {
-            string expectedQuery = null;
+            var expectedQuery =
+                "SET @sortColumn = LOWER(@sortColumn); SET @sortOrder = LOWER(@sortOrder); WITH SortedItems AS ( SELECT ClientId, FirstName, MiddleName, LastName, ROW_NUMBER() OVER ( ORDER BY CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN ClientId END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN ClientId END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN FirstName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN FirstName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN MiddleName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN MiddleName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN LastName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN LastName END ASC  ) AS RowNumber, COUNT() OVER() AS TotalRecords FROM dbo.Clients (NOLOCK) WHERE [FirstName] LIKE ('Jo%') ) SELECT ClientId, FirstName, MiddleName, LastName, [TotalRecords], ([TotalRecords] + @rowsPerPage - 1) / @rowsPerPage AS NumberOfPages FROM SortedItems WHERE SortedItems.RowNumber BETWEEN ((@pageNumber - 1) * @rowsPerPage) + 1 AND @rowsPerPage * @pageNumber  AND [FirstName] LIKE ('Jo%') ORDER BY CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN ClientId END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN ClientId END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN FirstName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN FirstName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN MiddleName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN MiddleName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = '' THEN LastName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = '' THEN LastName END ASC ;";
 
-            expectedQuery =
-                "SET @sortColumn = LOWER(@sortColumn); SET @sortOrder = LOWER(@sortOrder); WITH SortedItems AS ( SELECT ClientId, FirstName, MiddleName, LastName, ROW_NUMBER() OVER ( ORDER BY CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = 'firstname' THEN FirstName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = 'firstname' THEN FirstName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = 'lastname' THEN LastName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = 'lastname' THEN LastName END ASC  ) AS RowNumber, COUNT(ClientId) OVER() AS TotalRecords FROM dbo.Clients (NOLOCK) WHERE [FirstName] LIKE ('Jo%') ) SELECT ClientId, FirstName, MiddleName, LastName, [TotalRecords], ([TotalRecords] + @rowsPerPage - 1) / @rowsPerPage AS NumberOfPages FROM SortedItems WHERE SortedItems.RowNumber BETWEEN ((@pageNumber - 1) * @rowsPerPage) + 1 AND @rowsPerPage * @pageNumber  AND [FirstName] LIKE ('Jo%') ORDER BY CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = 'firstname' THEN FirstName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = 'firstname' THEN FirstName END ASC, CASE WHEN @sortOrder <> 'desc' THEN NULL WHEN @sortColumn = 'lastname' THEN LastName END DESC, CASE WHEN @sortOrder <> 'asc' THEN NULL WHEN @sortColumn = 'lastname' THEN LastName END ASC ;";
+            var dataMapping = new Mock<IDataMapper>();
 
             Mocks.Get<IFieldHelper>()
                 .Setup(x => x.BuildFields(It.IsAny<IEnumerable<string>>(),
-                    It.IsAny<string>(), It.IsAny<ClientDataModel>(), It.IsAny<bool>(), 
+                    It.IsAny<string>(), It.IsAny<ClientDataModel>(), It.IsAny<bool>(),
                     It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MappingKind>()))
                 .Returns(new TableObjectMapping
                 {
                     TableName = "dbo.Clients",
-                    FieldMappings =  new Dictionary<string, FieldParameterMapping>
+                    FieldMappings = new Dictionary<string, FieldParameterMapping>
                         {
                             {"Id", new FieldParameterMapping("ClientId", "@clientId", SqlDbType.UniqueIdentifier, isIdentity:true)},
                             {"FirstName", new FieldParameterMapping("FirstName", "@firstName", SqlDbType.NVarChar)},
@@ -38,6 +39,18 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderS
                             {"LastName", new FieldParameterMapping("LastName", "@lastName", SqlDbType.NVarChar)}
                         }
                 });
+
+            dataMapping
+                .Setup(x => x.GetMappingFor<ClientDataModel>())
+                .Returns(GetTypeMapping);
+
+            Mocks.Get<IConfiguration>()
+                .Setup(x => x[Constants.Configuration.MappingKind])
+                .Returns(MappingKind.Attribute.ToString);
+
+            Mocks.Get<IObjectMapperFactory>()
+                .Setup(x => x.GetMapper(It.IsAny<MappingKind>()))
+                .Returns(dataMapping.Object);
 
             Mocks.Get<IPredicateBuilder>()
                 .Setup(x => x.BuildContainer(It.IsAny<Expression>(), It.IsAny<Type>(), It.IsAny<bool>(), It.IsAny<string>(), It.IsAny<string>()))
@@ -68,6 +81,47 @@ namespace Norml.Core.Data.Tests.QueryBuilders.Strategies.TSql.PagedQueryBuilderS
             Asserter.AssertEquality(expectedQuery, query.Query);
 
             Assert.AreEqual(4, query.Parameters.Count());
+        }
+
+        private TypeMapping GetTypeMapping()
+        {
+            return new TypeMapping
+            {
+                DataSource = "dbo.Clients",
+                PropertyMappings = new List<PropertyMapping>
+                {
+                    new PropertyMapping
+                    {
+                        PropertyName = "Id",
+                        Field = "ClientId",
+                        ParameterName = "@clientId",
+                        DatabaseType = SqlDbType.UniqueIdentifier,
+                        IsIdentity = true,
+                        MappedType = typeof(Guid)
+                    },
+                    new PropertyMapping
+                    {
+                        PropertyName = "FirstName",
+                        Field = "FirstName",
+                        ParameterName = "@firstName",
+                        DatabaseType = SqlDbType.NVarChar
+                    },
+                    new PropertyMapping
+                    {
+                        PropertyName = "MiddleName",
+                        Field = "MiddleName",
+                        ParameterName = "@middleName",
+                        DatabaseType = SqlDbType.NVarChar
+                    },
+                    new PropertyMapping
+                    {
+                        PropertyName = "LastName",
+                        Field = "LastName",
+                        ParameterName = "@lastName",
+                        DatabaseType = SqlDbType.NVarChar
+                    }
+                }
+            };
         }
 
         public class ClientDataModel
